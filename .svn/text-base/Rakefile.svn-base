@@ -6,8 +6,8 @@
 require 'rubygems'
 require 'rake'
 require 'rake/clean'
-require 'rake/gempackagetask'
-require 'rake/rdoctask'
+require 'rubygems/package_task'
+require 'rdoc/task'
 require 'rake/testtask'
 
 spec = Gem::Specification.new do |s|
@@ -17,8 +17,8 @@ spec = Gem::Specification.new do |s|
   s.extra_rdoc_files = ['README', 'LICENSE']
   s.summary = 'Your summary here'
   s.description = s.summary
-  s.author = ''
-  s.email = ''
+  s.author = 'Bill Nizeyimana'
+  s.email = 'bill.nizeyimana@gmail.com'
   # s.executables = ['your_executable_here']
   s.files = %w(LICENSE README Rakefile) + Dir.glob("{bin,lib,spec}/**/*")
   s.require_path = "lib"

@@ -1,9 +1,12 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
+$:.unshift File.join(File.dirname(__FILE__),'..','class')
 require 'sinatra/base'
 require 'webrick'
 require 'webrick/https'
 require 'openssl'
+require 'json'
+load 'web_app_submit.rb'
 
 
 
@@ -23,18 +26,44 @@ class WebAppServer < Sinatra::Base
         :SSLPrivateKey      => OpenSSL::PKey::RSA.new(File.open(File.join(@CERT_PATH,"server.key")).read),
         :SSLCertName        => [[ "CN",WEBrick::Utils::getservername ]]
     }
+    
     Rack::Handler::WEBrick.run self, @webrick_options
+    
   end
   
-   post '/' do
-      "Hellow, worldjjj!"
-    end
+   use WebAppSubmit
+    
     get '/' do
-      "Hellow, world!"
+      '<form action="/submit/facebook" method="post">
+      <input type="submit" value="Submit" />
+      </from>'
     end
+    
     get '/favicon.ico' do
       send_file "favicon.ico"
     end
+    
+    
+   not_found do
+    'Pas moyen de trouver ce que vous cherchez'
+  end
+  
+   error do
+    'mais une '
+  end
+  
+  get '/*.*' do |chemin, ext|
+    [chemin, ext] # => ["path/to/file", "xml"]
+  end
+  
+  get '/*'  do
+    "error"
+  end
+  
+  post '/*'  do
+    "Unknow path!!"
+  end
+  
   
   
 end

@@ -40,6 +40,8 @@ class ChatServer
    loop {
      begin
       @threads.add(Thread.new(@ssl_socket.accept,@userList) { |socket, userList|
+          puts "log: Connection from #{socket.peeraddr[2]} at
+          #{socket.peeraddr[3]}"
           user = User.new(socket,self)
           userList.add(user)
           user.run

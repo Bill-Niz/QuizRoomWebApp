@@ -71,6 +71,22 @@
 					
 					<li><a href="#method-c-new">::new</a></li>
 					
+					<li><a href="#method-i-add">#add</a></li>
+					
+					<li><a href="#method-i-addContentChangedListener">#addContentChangedListener</a></li>
+					
+					<li><a href="#method-i-fireContentsAdded">#fireContentsAdded</a></li>
+					
+					<li><a href="#method-i-fireContentsChanged">#fireContentsChanged</a></li>
+					
+					<li><a href="#method-i-fireContentsRemoved">#fireContentsRemoved</a></li>
+					
+					<li><a href="#method-i-getcontents">#getcontents</a></li>
+					
+					<li><a href="#method-i-remove">#remove</a></li>
+					
+					<li><a href="#method-i-removeContentChangedListener">#removeContentChangedListener</a></li>
+					
 				</ul>
 			</div>
 			
@@ -129,6 +145,8 @@
 				
 					<li><a href="./ChannelRepository.html">ChannelRepository</a></li>
 				
+					<li><a href="./ChatServer.html">ChatServer</a></li>
+				
 					<li><a href="./ContentChanged.html">ContentChanged</a></li>
 				
 					<li><a href="./DataChangeListener.html">DataChangeListener</a></li>
@@ -141,15 +159,17 @@
 				
 					<li><a href="./MysqlHelper.html">MysqlHelper</a></li>
 				
-					<li><a href="./NewClassTest.html">NewClassTest</a></li>
-				
 					<li><a href="./Repository.html">Repository</a></li>
 				
 					<li><a href="./Test.html">Test</a></li>
 				
+					<li><a href="./ThreadRepository.html">ThreadRepository</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserRepository.html">UserRepository</a></li>
+				
+					<li><a href="./WebAppServer.html">WebAppServer</a></li>
 				
 				</ul>
 				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
@@ -163,11 +183,7 @@
 		<h1 class="class">Repository</h1>
 
 		<div id="description">
-			<p>
-To change this template, choose Tools | Templates and open the template in
-the editor.
-</p>
-
+			
 		</div>
 
 		<!-- Constants -->
@@ -202,10 +218,331 @@ the editor.
 					<div class="method-source-code"
 						id="new-source">
 <pre>
-   <span class="ruby-comment cmt"># File lib/class/repository.rb, line 5</span>
-5:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
-6:     
-7:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/class/repository.rb, line 10</span>
+10:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+11:     <span class="ruby-ivar">@contents</span> = []
+12:     <span class="ruby-ivar">@listeners</span> = []
+13:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="add-method" class="method-detail ">
+				<a name="method-i-add"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">add</span><span
+						class="method-args">(content)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Add a new content in Array
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="add-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/repository.rb, line 18</span>
+18:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">content</span>)
+19:     <span class="ruby-ivar">@contents</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">content</span>
+20:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">fireContentsChanged</span>(<span class="ruby-identifier">content</span>)
+21:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">fireContentsAdded</span>(<span class="ruby-identifier">content</span>)
+22:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="add-ontent-hanged-istener-method" class="method-detail ">
+				<a name="method-i-addContentChangedListener"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">addContentChangedListener</span><span
+						class="method-args">(listener)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Add listener to listner list
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="add-ontent-hanged-istener-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/repository.rb, line 40</span>
+40:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">addContentChangedListener</span>(<span class="ruby-identifier">listener</span>)
+41:     
+42:     <span class="ruby-ivar">@listeners</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">listener</span>)
+43:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="fire-ontents-dded-method" class="method-detail ">
+				<a name="method-i-fireContentsAdded"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">fireContentsAdded</span><span
+						class="method-args">(data)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Fire Contents added event
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="fire-ontents-dded-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/repository.rb, line 65</span>
+65:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fireContentsAdded</span>(<span class="ruby-identifier">data</span>)
+66:     <span class="ruby-ivar">@listeners</span>.<span class="ruby-identifier">each</span>() { <span class="ruby-operator">|</span><span class="ruby-identifier">listener</span><span class="ruby-operator">|</span>  
+67:       
+68:        <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ContentChanged</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">listener</span>.<span class="ruby-identifier">class</span>
+69:          <span class="ruby-identifier">listener</span>.<span class="ruby-identifier">onContentAdded</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-identifier">data</span>)
+70:       <span class="ruby-keyword kw">end</span>
+71:       }
+72:     
+73:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="fire-ontents-hanged-method" class="method-detail ">
+				<a name="method-i-fireContentsChanged"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">fireContentsChanged</span><span
+						class="method-args">(data)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Fire Contents changed event
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="fire-ontents-hanged-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/repository.rb, line 53</span>
+53:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fireContentsChanged</span>(<span class="ruby-identifier">data</span>)
+54:     <span class="ruby-ivar">@listeners</span>.<span class="ruby-identifier">each</span>() { <span class="ruby-operator">|</span><span class="ruby-identifier">listener</span><span class="ruby-operator">|</span>  
+55:       
+56:        <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ContentChanged</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">listener</span>.<span class="ruby-identifier">class</span>
+57:          <span class="ruby-identifier">listener</span>.<span class="ruby-identifier">onContentChanged</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-identifier">data</span>)
+58:       <span class="ruby-keyword kw">end</span>
+59:       }
+60:     
+61:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="fire-ontents-emoved-method" class="method-detail ">
+				<a name="method-i-fireContentsRemoved"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">fireContentsRemoved</span><span
+						class="method-args">(data)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<pre>
+ 
+</pre>
+<p>
+Fire Contents removed event
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="fire-ontents-emoved-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/repository.rb, line 77</span>
+77:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fireContentsRemoved</span>(<span class="ruby-identifier">data</span>)
+78:     <span class="ruby-ivar">@listeners</span>.<span class="ruby-identifier">each</span>() { <span class="ruby-operator">|</span><span class="ruby-identifier">listener</span><span class="ruby-operator">|</span>  
+79:       
+80:        <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ContentChanged</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">listener</span>.<span class="ruby-identifier">class</span>
+81:         <span class="ruby-identifier">listener</span>.<span class="ruby-identifier">onContentRemoved</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-identifier">data</span>)
+82:       <span class="ruby-keyword kw">end</span>
+83:       }
+84:     
+85:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="getcontents-method" class="method-detail ">
+				<a name="method-i-getcontents"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">getcontents</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Get contents
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="getcontents-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/repository.rb, line 34</span>
+34:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">getcontents</span>()
+35:     <span class="ruby-ivar">@contents</span>
+36:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="remove-method" class="method-detail ">
+				<a name="method-i-remove"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">remove</span><span
+						class="method-args">(content)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Remove the content passed in arg
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="remove-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/repository.rb, line 26</span>
+26:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove</span>(<span class="ruby-identifier">content</span>)
+27:     <span class="ruby-ivar">@content</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">content</span>)
+28:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">fireContentsChanged</span>(<span class="ruby-identifier">content</span>)
+29:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">fireContentsChanged</span>(<span class="ruby-identifier">content</span>)
+30:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="remove-ontent-hanged-istener-method" class="method-detail ">
+				<a name="method-i-removeContentChangedListener"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">removeContentChangedListener</span><span
+						class="method-args">(listener)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Remove listener to listner list
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="remove-ontent-hanged-istener-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/repository.rb, line 47</span>
+47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">removeContentChangedListener</span>(<span class="ruby-identifier">listener</span>)
+48:     <span class="ruby-ivar">@listeners</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">listener</span>)
+49:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

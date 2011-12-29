@@ -38,9 +38,6 @@
 				<div class="section-body">
 					<ul>
 					
-						<li><a href="./lib/main_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/main.rb">lib/main.rb</a></li>
-					
 						<li><a href="./pkg/QuizRoomWebApp-0_0_1/lib/main_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
 							class="thickbox" title="pkg/QuizRoomWebApp-0.0.1/lib/main.rb">pkg/QuizRoomWebApp-0.0.1/lib/main.rb</a></li>
 					
@@ -74,10 +71,6 @@
 					
 					<li><a href="#method-c-new">::new</a></li>
 					
-					<li><a href="#method-c-new">::new</a></li>
-					
-					<li><a href="#method-i-onDataChanged">#onDataChanged</a></li>
-					
 					<li><a href="#method-i-onDataChanged">#onDataChanged</a></li>
 					
 				</ul>
@@ -89,10 +82,6 @@
 			<div id="includes-section" class="section">
 				<h3 class="section-header">Included Modules</h3>
 				<ul class="link-list">
-				
-				
-					<li><a class="include" href="DataChangeListener.html">DataChangeListener</a></li>
-				
 				
 				
 					<li><a class="include" href="DataChangeListener.html">DataChangeListener</a></li>
@@ -153,6 +142,8 @@
 				
 					<li><a href="./ChannelRepository.html">ChannelRepository</a></li>
 				
+					<li><a href="./ChatServer.html">ChatServer</a></li>
+				
 					<li><a href="./ContentChanged.html">ContentChanged</a></li>
 				
 					<li><a href="./DataChangeListener.html">DataChangeListener</a></li>
@@ -165,15 +156,17 @@
 				
 					<li><a href="./MysqlHelper.html">MysqlHelper</a></li>
 				
-					<li><a href="./NewClassTest.html">NewClassTest</a></li>
-				
 					<li><a href="./Repository.html">Repository</a></li>
 				
 					<li><a href="./Test.html">Test</a></li>
 				
+					<li><a href="./ThreadRepository.html">ThreadRepository</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserRepository.html">UserRepository</a></li>
+				
+					<li><a href="./WebAppServer.html">WebAppServer</a></li>
 				
 				</ul>
 				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
@@ -222,41 +215,6 @@
 					<div class="method-source-code"
 						id="new-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/main.rb, line 67</span>
-67:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">s</span>)
-68:     <span class="ruby-ivar">@dataS</span> = <span class="ruby-identifier">s</span>
-69:     <span class="ruby-ivar">@dataS</span>.<span class="ruby-identifier">addDataChangedListener</span>(<span class="ruby-keyword kw">self</span>)
-70:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
-
-		
-			<div id="new-method" class="method-detail ">
-				<a name="method-c-new"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">new</span><span
-						class="method-args">(s)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					
-					
-
-					
-					<div class="method-source-code"
-						id="new-source">
-<pre>
     <span class="ruby-comment cmt"># File pkg/QuizRoomWebApp-0.0.1/lib/main.rb, line 67</span>
 67:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">s</span>)
 68:     <span class="ruby-ivar">@dataS</span> = <span class="ruby-identifier">s</span>
@@ -276,40 +234,6 @@
 	
 		<div id="public-instance-method-details" class="method-section section">
 			<h3 class="section-header">Public Instance Methods</h3>
-
-		
-			<div id="on-ata-hanged-method" class="method-detail ">
-				<a name="method-i-onDataChanged"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">onDataChanged</span><span
-						class="method-args">(source,data)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					
-					
-
-					
-					<div class="method-source-code"
-						id="on-ata-hanged-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/main.rb, line 72</span>
-72:    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onDataChanged</span>(<span class="ruby-identifier">source</span>,<span class="ruby-identifier">data</span>)
-73:      <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Datachaged! &gt; &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">to_s</span> 
-74:    <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
 
 		
 			<div id="on-ata-hanged-method" class="method-detail ">

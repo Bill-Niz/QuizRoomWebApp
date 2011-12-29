@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: ChatServer</title>
+
+	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="./lib/class/chat_server_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/class/chat_server.rb">lib/class/chat_server.rb</a></li>
+					
+						<li><a href="./test/chat_server_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="test/chat_server.rb">test/chat_server.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">Test::Unit::TestCase</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-c-new">::new</a></li>
+					
+					<li><a href="#method-i-loadChannelList">#loadChannelList</a></li>
+					
+					<li><a href="#method-i-onContentAdded">#onContentAdded</a></li>
+					
+					<li><a href="#method-i-onContentChanged">#onContentChanged</a></li>
+					
+					<li><a href="#method-i-onContentRemoved">#onContentRemoved</a></li>
+					
+					<li><a href="#method-i-run">#run</a></li>
+					
+					<li><a href="#method-i-sendToChannel">#sendToChannel</a></li>
+					
+					<li><a href="#method-i-sendToUser">#sendToUser</a></li>
+					
+					<li><a href="#method-i-test_foo">#test_foo</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+			<div id="includes-section" class="section">
+				<h3 class="section-header">Included Modules</h3>
+				<ul class="link-list">
+				
+				
+					<li><a class="include" href="ContentChanged.html">ContentChanged</a></li>
+				
+				
+				</ul>
+			</div>
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./LICENSE.html">LICENSE</a></li>
+				
+					<li class="file"><a href="./README.html">README</a></li>
+				
+					<li class="file"><a href="./Rakefile.html">Rakefile</a></li>
+				
+					<li class="file"><a href="./lib/ssl/crt.html">crt</a></li>
+				
+					<li class="file"><a href="./lib/ssl/key.html">key</a></li>
+				
+					<li class="file"><a href="./nbproject/private/rake-d_txt.html">rake-d.txt</a></li>
+				
+					<li class="file"><a href="./pkg/QuizRoomWebApp-0_0_1/LICENSE.html">LICENSE</a></li>
+				
+					<li class="file"><a href="./pkg/QuizRoomWebApp-0_0_1/README.html">README</a></li>
+				
+					<li class="file"><a href="./pkg/QuizRoomWebApp-0_0_1/Rakefile.html">Rakefile</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./ChangeEvent.html">ChangeEvent</a></li>
+				
+					<li><a href="./Channel.html">Channel</a></li>
+				
+					<li><a href="./ChannelRepository.html">ChannelRepository</a></li>
+				
+					<li><a href="./ChatServer.html">ChatServer</a></li>
+				
+					<li><a href="./ContentChanged.html">ContentChanged</a></li>
+				
+					<li><a href="./DataChangeListener.html">DataChangeListener</a></li>
+				
+					<li><a href="./DataRemovedListner.html">DataRemovedListner</a></li>
+				
+					<li><a href="./DataSource.html">DataSource</a></li>
+				
+					<li><a href="./MyServer.html">MyServer</a></li>
+				
+					<li><a href="./MysqlHelper.html">MysqlHelper</a></li>
+				
+					<li><a href="./Repository.html">Repository</a></li>
+				
+					<li><a href="./Test.html">Test</a></li>
+				
+					<li><a href="./ThreadRepository.html">ThreadRepository</a></li>
+				
+					<li><a href="./User.html">User</a></li>
+				
+					<li><a href="./UserRepository.html">UserRepository</a></li>
+				
+					<li><a href="./WebAppServer.html">WebAppServer</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">ChatServer</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="method-c-new"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new</span><span
+						class="method-args">(port)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/chat_server.rb, line 12</span>
+12:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">port</span>)
+13:     <span class="ruby-ivar">@port</span> = <span class="ruby-identifier">port</span>
+14:     <span class="ruby-ivar">@userList</span> = <span class="ruby-constant">UserRepository</span>.<span class="ruby-identifier">new</span>
+15:     <span class="ruby-ivar">@userList</span>.<span class="ruby-identifier">addContentChangedListener</span>(<span class="ruby-keyword kw">self</span>)
+16:     
+17:     <span class="ruby-ivar">@channelList</span> = <span class="ruby-constant">ChannelRepository</span>.<span class="ruby-identifier">new</span>
+18:     <span class="ruby-ivar">@channelList</span>.<span class="ruby-identifier">addContentChangedListener</span>(<span class="ruby-keyword kw">self</span>)
+19:     
+20:     <span class="ruby-ivar">@threads</span> = <span class="ruby-constant">ThreadRepository</span>.<span class="ruby-identifier">new</span>
+21:     <span class="ruby-ivar">@threads</span>.<span class="ruby-identifier">addContentChangedListener</span>(<span class="ruby-keyword kw">self</span>)
+22:     <span class="ruby-ivar">@server</span> = <span class="ruby-ivar">@server</span> = <span class="ruby-constant">TCPServer</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@port</span>)
+23:     
+24:     <span class="ruby-ivar">@ssl_context</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSLContext</span>.<span class="ruby-identifier">new</span>()
+25: 
+26:     <span class="ruby-ivar">@ssl_context</span>.<span class="ruby-identifier">cert</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">X509</span><span class="ruby-operator">::</span><span class="ruby-constant">Certificate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-value str">&quot;ssl/server.crt&quot;</span>))
+27: 
+28:     <span class="ruby-ivar">@ssl_context</span>.<span class="ruby-identifier">key</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">PKey</span><span class="ruby-operator">::</span><span class="ruby-constant">RSA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-value str">&quot;ssl/server.key&quot;</span>))
+29: 
+30:     <span class="ruby-ivar">@ssl_socket</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSLServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@server</span>, <span class="ruby-ivar">@ssl_context</span>)
+31:  
+32:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">loadChannelList</span>
+33:     <span class="ruby-identifier">run</span>()
+34:     
+35:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="load-hannel-ist-method" class="method-detail ">
+				<a name="method-i-loadChannelList"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">loadChannelList</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="load-hannel-ist-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/chat_server.rb, line 62</span>
+62:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">loadChannelList</span>
+63:     <span class="ruby-ivar">@channelList</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Channel</span>.<span class="ruby-identifier">new</span>)
+64:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="on-ontent-dded-method" class="method-detail ">
+				<a name="method-i-onContentAdded"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">onContentAdded</span><span
+						class="method-args">(source,data)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="on-ontent-dded-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/class/chat_server.rb, line 98</span>
+ 98:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onContentAdded</span>(<span class="ruby-identifier">source</span>,<span class="ruby-identifier">data</span>)
+ 99:     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">source</span>
+100:     <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">source</span>
+101:     <span class="ruby-keyword kw">when</span> <span class="ruby-ivar">@userList</span>
+102:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{data.to_s} : Join the Server !&quot;</span>
+103:     <span class="ruby-keyword kw">when</span> <span class="ruby-ivar">@channelList</span>
+104:     <span class="ruby-keyword kw">when</span> <span class="ruby-ivar">@threads</span>
+105:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;New client Connected ! : #{data.to_s}&quot;</span>
+106:     <span class="ruby-keyword kw">else</span>
+107:       <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Unknow Source!&quot;</span>
+108:     <span class="ruby-keyword kw">end</span>
+109:     
+110:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="on-ontent-hanged-method" class="method-detail ">
+				<a name="method-i-onContentChanged"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">onContentChanged</span><span
+						class="method-args">(source,data)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="on-ontent-hanged-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/chat_server.rb, line 81</span>
+81:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onContentChanged</span>(<span class="ruby-identifier">source</span>,<span class="ruby-identifier">data</span>)
+82:     
+83:     <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">source</span>
+84:     <span class="ruby-keyword kw">when</span> <span class="ruby-ivar">@userList</span>
+85:       <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;user Added \n&quot;</span>
+86:     <span class="ruby-keyword kw">when</span> <span class="ruby-ivar">@channelList</span>
+87:       <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Channel Added&quot;</span>
+88:     <span class="ruby-keyword kw">when</span> <span class="ruby-ivar">@threads</span>
+89:       <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Tread Added&quot;</span>
+90:     <span class="ruby-keyword kw">else</span>
+91:       <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Unknow Source!&quot;</span>
+92:     <span class="ruby-keyword kw">end</span>
+93:     
+94:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="on-ontent-emoved-method" class="method-detail ">
+				<a name="method-i-onContentRemoved"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">onContentRemoved</span><span
+						class="method-args">(souce,data)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="on-ontent-emoved-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/class/chat_server.rb, line 114</span>
+114:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onContentRemoved</span>(<span class="ruby-identifier">souce</span>,<span class="ruby-identifier">data</span>)
+115:     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">source</span>
+116:     <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">source</span>
+117:     <span class="ruby-keyword kw">when</span> <span class="ruby-ivar">@userList</span>
+118:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{data.to_s} : Quit the Server !&quot;</span>
+119:     <span class="ruby-keyword kw">when</span> <span class="ruby-ivar">@channelList</span>
+120:     <span class="ruby-keyword kw">when</span> <span class="ruby-ivar">@threads</span>
+121:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;New client Disconnected ! : #{data.to_s}&quot;</span>
+122:     <span class="ruby-keyword kw">else</span>
+123:       <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Unknow Source!&quot;</span>
+124:     <span class="ruby-keyword kw">end</span>
+125:     
+126:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="run-method" class="method-detail ">
+				<a name="method-i-run"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">run</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="run-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/chat_server.rb, line 38</span>
+38:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>
+39:    
+40:    <span class="ruby-identifier">loop</span> {
+41:      <span class="ruby-keyword kw">begin</span>
+42:       <span class="ruby-ivar">@threads</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@ssl_socket</span>.<span class="ruby-identifier">accept</span>,<span class="ruby-ivar">@userList</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">socket</span>, <span class="ruby-identifier">userList</span><span class="ruby-operator">|</span>
+43:           <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;log: Connection from #{socket.peeraddr[2]} at
+44:           #{socket.peeraddr[3]}&quot;</span>
+45:           <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">socket</span>,<span class="ruby-keyword kw">self</span>)
+46:           <span class="ruby-identifier">userList</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">user</span>)
+47:           <span class="ruby-identifier">user</span>.<span class="ruby-identifier">run</span>
+48:       
+49:     })
+50:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSLError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+51:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; #{e.to_s} &quot;</span>
+52:       <span class="ruby-keyword kw">retry</span>
+53:     <span class="ruby-keyword kw">rescue</span>
+54:       <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Unknown Error&quot;</span>
+55:       <span class="ruby-keyword kw">retry</span>
+56:      <span class="ruby-keyword kw">end</span>
+57: }
+58:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="send-o-hannel-method" class="method-detail ">
+				<a name="method-i-sendToChannel"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">sendToChannel</span><span
+						class="method-args">(fromIdUser,toIdChannel)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="send-o-hannel-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/chat_server.rb, line 76</span>
+76:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sendToChannel</span>(<span class="ruby-identifier">fromIdUser</span>,<span class="ruby-identifier">toIdChannel</span>)
+77:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="send-o-ser-method" class="method-detail ">
+				<a name="method-i-sendToUser"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">sendToUser</span><span
+						class="method-args">(fromIdUser,toIdUser)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="send-o-ser-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/chat_server.rb, line 69</span>
+69:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sendToUser</span>(<span class="ruby-identifier">fromIdUser</span>,<span class="ruby-identifier">toIdUser</span>)
+70:     
+71:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="test-foo-method" class="method-detail ">
+				<a name="method-i-test_foo"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">test_foo</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="test-foo-source">
+<pre>
+    <span class="ruby-comment cmt"># File test/chat_server.rb, line 10</span>
+10:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_foo</span>
+11:     <span class="ruby-comment cmt">#TODO: Write test</span>
+12:     <span class="ruby-identifier">flunk</span> <span class="ruby-value str">&quot;TODO: Write test&quot;</span>
+13:     <span class="ruby-comment cmt"># assert_equal(&quot;foo&quot;, bar)</span>
+14:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

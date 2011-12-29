@@ -71,6 +71,16 @@
 					
 					<li><a href="#method-c-new">::new</a></li>
 					
+					<li><a href="#method-i-connected%3F">#connected?</a></li>
+					
+					<li><a href="#method-i-processIncomingData">#processIncomingData</a></li>
+					
+					<li><a href="#method-i-repeat_every">#repeat_every</a></li>
+					
+					<li><a href="#method-i-run">#run</a></li>
+					
+					<li><a href="#method-i-setId%3D">#setId=</a></li>
+					
 				</ul>
 			</div>
 			
@@ -129,6 +139,8 @@
 				
 					<li><a href="./ChannelRepository.html">ChannelRepository</a></li>
 				
+					<li><a href="./ChatServer.html">ChatServer</a></li>
+				
 					<li><a href="./ContentChanged.html">ContentChanged</a></li>
 				
 					<li><a href="./DataChangeListener.html">DataChangeListener</a></li>
@@ -141,15 +153,17 @@
 				
 					<li><a href="./MysqlHelper.html">MysqlHelper</a></li>
 				
-					<li><a href="./NewClassTest.html">NewClassTest</a></li>
-				
 					<li><a href="./Repository.html">Repository</a></li>
 				
 					<li><a href="./Test.html">Test</a></li>
 				
+					<li><a href="./ThreadRepository.html">ThreadRepository</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserRepository.html">UserRepository</a></li>
+				
+					<li><a href="./WebAppServer.html">WebAppServer</a></li>
 				
 				</ul>
 				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
@@ -188,7 +202,7 @@ the editor.
 				<div class="method-heading">
 				
 					<span class="method-name">new</span><span
-						class="method-args">()</span>
+						class="method-args">(socket,chatServer)</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -202,10 +216,215 @@ the editor.
 					<div class="method-source-code"
 						id="new-source">
 <pre>
-   <span class="ruby-comment cmt"># File lib/class/user.rb, line 5</span>
-5:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
-6:     
-7:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/class/user.rb, line 5</span>
+ 5:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">socket</span>,<span class="ruby-identifier">chatServer</span>)
+ 6:     <span class="ruby-ivar">@id</span> = <span class="ruby-value str">&quot;&quot;</span>
+ 7:     <span class="ruby-ivar">@socket</span> = <span class="ruby-identifier">socket</span>
+ 8:     <span class="ruby-ivar">@chatServer</span> = <span class="ruby-identifier">chatServer</span>
+ 9:     <span class="ruby-ivar">@connected</span> = <span class="ruby-keyword kw">true</span>
+10:     <span class="ruby-ivar">@thread</span> = <span class="ruby-identifier">repeat_every</span>(<span class="ruby-value">5</span>) <span class="ruby-keyword kw">do</span>
+11:   <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">ctime</span>)
+12: <span class="ruby-keyword kw">end</span>  
+13:     
+14:     
+15:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="connected--method" class="method-detail ">
+				<a name="method-i-connected%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">connected?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="connected--source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/user.rb, line 52</span>
+52:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">connected?</span>
+53:     <span class="ruby-ivar">@connected</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span>(<span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">closed?</span>) 
+54:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="repeat-every-method" class="method-detail ">
+				<a name="method-i-repeat_every"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">repeat_every</span><span
+						class="method-args">(interval)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="repeat-every-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/user.rb, line 17</span>
+17:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">repeat_every</span>(<span class="ruby-identifier">interval</span>)
+18:   <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span>
+19:     <span class="ruby-identifier">loop</span> <span class="ruby-keyword kw">do</span>
+20:       <span class="ruby-identifier">start_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+21:       <span class="ruby-keyword kw">yield</span>
+22:       <span class="ruby-identifier">elapsed</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start_time</span>
+23:       <span class="ruby-identifier">sleep</span>([<span class="ruby-identifier">interval</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">elapsed</span>, <span class="ruby-value">0</span>].<span class="ruby-identifier">max</span>)
+24:     <span class="ruby-keyword kw">end</span>
+25:   <span class="ruby-keyword kw">end</span>
+26: <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="run-method" class="method-detail ">
+				<a name="method-i-run"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">run</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="run-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/user.rb, line 31</span>
+31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span> 
+32:     <span class="ruby-keyword kw">while</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">connected?</span>
+33:       <span class="ruby-identifier">line</span> = <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">gets</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">closed?</span>
+34:       <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">line</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>)
+35:         <span class="ruby-ivar">@socket</span>.<span class="ruby-identifier">close</span>
+36:       <span class="ruby-keyword kw">end</span>
+37:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">processIncomingData</span>(<span class="ruby-identifier">line</span>)
+38:      
+39:     <span class="ruby-keyword kw">end</span>
+40:     <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Connection Closed!&quot;</span>
+41:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="set-d--method" class="method-detail ">
+				<a name="method-i-setId%3D"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">setId=</span><span
+						class="method-args">(value)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="set-d--source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/user.rb, line 60</span>
+60:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setId=</span>(<span class="ruby-identifier">value</span>)
+61:     <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">value</span>
+62:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="private-instance-method-details" class="method-section section">
+			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="process-ncoming-ata-method" class="method-detail ">
+				<a name="method-i-processIncomingData"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">processIncomingData</span><span
+						class="method-args">(data)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="process-ncoming-ata-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/user.rb, line 45</span>
+45:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">processIncomingData</span>(<span class="ruby-identifier">data</span>)
+46:     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">data</span>
+47:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

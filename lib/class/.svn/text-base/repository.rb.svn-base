@@ -38,7 +38,7 @@ class Repository
   # Add listener to listner list
   ##
   def addContentChangedListener(listener)
-    puts "#{self.class} : #{listener.to_s}"
+    
     @listeners << (listener)
   end
   ##

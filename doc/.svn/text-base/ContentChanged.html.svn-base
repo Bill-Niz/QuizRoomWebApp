@@ -62,11 +62,11 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#method-i-onDataAdded">#onDataAdded</a></li>
+					<li><a href="#method-i-onContentAdded">#onContentAdded</a></li>
 					
-					<li><a href="#method-i-onDataChanged">#onDataChanged</a></li>
+					<li><a href="#method-i-onContentChanged">#onContentChanged</a></li>
 					
-					<li><a href="#method-i-onDataRemoved">#onDataRemoved</a></li>
+					<li><a href="#method-i-onContentRemoved">#onContentRemoved</a></li>
 					
 				</ul>
 			</div>
@@ -126,6 +126,8 @@
 				
 					<li><a href="./ChannelRepository.html">ChannelRepository</a></li>
 				
+					<li><a href="./ChatServer.html">ChatServer</a></li>
+				
 					<li><a href="./ContentChanged.html">ContentChanged</a></li>
 				
 					<li><a href="./DataChangeListener.html">DataChangeListener</a></li>
@@ -138,15 +140,17 @@
 				
 					<li><a href="./MysqlHelper.html">MysqlHelper</a></li>
 				
-					<li><a href="./NewClassTest.html">NewClassTest</a></li>
-				
 					<li><a href="./Repository.html">Repository</a></li>
 				
 					<li><a href="./Test.html">Test</a></li>
 				
+					<li><a href="./ThreadRepository.html">ThreadRepository</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserRepository.html">UserRepository</a></li>
+				
+					<li><a href="./WebAppServer.html">WebAppServer</a></li>
 				
 				</ul>
 				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
@@ -179,13 +183,13 @@ the editor.
 			<h3 class="section-header">Public Instance Methods</h3>
 
 		
-			<div id="on-ata-dded-method" class="method-detail ">
-				<a name="method-i-onDataAdded"></a>
+			<div id="on-ontent-dded-method" class="method-detail ">
+				<a name="method-i-onContentAdded"></a>
 
 				<div class="method-heading">
 				
-					<span class="method-name">onDataAdded</span><span
-						class="method-args">()</span>
+					<span class="method-name">onContentAdded</span><span
+						class="method-args">(source,data)</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -197,10 +201,10 @@ the editor.
 
 					
 					<div class="method-source-code"
-						id="on-ata-dded-source">
+						id="on-ontent-dded-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/module/content_changed.rb, line 10</span>
-10:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onDataAdded</span>()
+10:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onContentAdded</span>(<span class="ruby-identifier">source</span>,<span class="ruby-identifier">data</span>)
 11:     
 12:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
@@ -213,13 +217,13 @@ the editor.
 			</div>
 
 		
-			<div id="on-ata-hanged-method" class="method-detail ">
-				<a name="method-i-onDataChanged"></a>
+			<div id="on-ontent-hanged-method" class="method-detail ">
+				<a name="method-i-onContentChanged"></a>
 
 				<div class="method-heading">
 				
-					<span class="method-name">onDataChanged</span><span
-						class="method-args">()</span>
+					<span class="method-name">onContentChanged</span><span
+						class="method-args">(source,data)</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -231,10 +235,10 @@ the editor.
 
 					
 					<div class="method-source-code"
-						id="on-ata-hanged-source">
+						id="on-ontent-hanged-source">
 <pre>
    <span class="ruby-comment cmt"># File lib/module/content_changed.rb, line 6</span>
-6:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onDataChanged</span>()
+6:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onContentChanged</span>(<span class="ruby-identifier">source</span>,<span class="ruby-identifier">data</span>)
 7:     
 8:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
@@ -247,13 +251,13 @@ the editor.
 			</div>
 
 		
-			<div id="on-ata-emoved-method" class="method-detail ">
-				<a name="method-i-onDataRemoved"></a>
+			<div id="on-ontent-emoved-method" class="method-detail ">
+				<a name="method-i-onContentRemoved"></a>
 
 				<div class="method-heading">
 				
-					<span class="method-name">onDataRemoved</span><span
-						class="method-args">()</span>
+					<span class="method-name">onContentRemoved</span><span
+						class="method-args">(souce,data)</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -265,10 +269,10 @@ the editor.
 
 					
 					<div class="method-source-code"
-						id="on-ata-emoved-source">
+						id="on-ontent-emoved-source">
 <pre>
     <span class="ruby-comment cmt"># File lib/module/content_changed.rb, line 14</span>
-14:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onDataRemoved</span>()
+14:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onContentRemoved</span>(<span class="ruby-identifier">souce</span>,<span class="ruby-identifier">data</span>)
 15:     
 16:   <span class="ruby-keyword kw">end</span></pre>
 					</div>

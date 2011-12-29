@@ -1,0 +1,60 @@
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+load "../lib/config.rb"
+class Submit
+  
+  ##
+  #
+  #     Normal method
+  #
+  # userData = {:email => "user@mail.com",
+  #             :password => "sha512",
+  #             :name => "name",
+  #             :lastname => "lastname",
+  #             :UUID => "UUID"
+  #             }
+  #             
+  #       Facebook method 
+  #            
+  # userData = {:email => "user@mail.com",
+  #             :password => "sha512",
+  #             :name => "name",
+  #             :lastname => "lastname",
+  #             :UUID => "UUID"
+  #             :"facebook_id => "fb_id"
+  #             }
+  #
+  ##
+  def initialize (data ,method)
+    @userData = data
+    @method = method
+    @mysqlHelper = MysqlHelper.new
+    
+  end
+  
+  ##
+  # Start user submision
+  ##
+  def proceedSubmit
+    
+    case @method
+    when "facebook"
+      
+    when "normal"
+    
+    end
+  end
+
+  ##
+  # Check if the user is already in the DataBase
+  ##
+  def checkUser
+    
+    @mysqlHelper.connect
+    @mysqlHelper.isInDB(Config::USER_TABLE, "email", @userData['email'])
+  end
+  
+  
+  
+end
+

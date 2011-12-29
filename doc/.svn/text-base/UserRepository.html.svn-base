@@ -129,6 +129,8 @@
 				
 					<li><a href="./ChannelRepository.html">ChannelRepository</a></li>
 				
+					<li><a href="./ChatServer.html">ChatServer</a></li>
+				
 					<li><a href="./ContentChanged.html">ContentChanged</a></li>
 				
 					<li><a href="./DataChangeListener.html">DataChangeListener</a></li>
@@ -141,15 +143,17 @@
 				
 					<li><a href="./MysqlHelper.html">MysqlHelper</a></li>
 				
-					<li><a href="./NewClassTest.html">NewClassTest</a></li>
-				
 					<li><a href="./Repository.html">Repository</a></li>
 				
 					<li><a href="./Test.html">Test</a></li>
 				
+					<li><a href="./ThreadRepository.html">ThreadRepository</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserRepository.html">UserRepository</a></li>
+				
+					<li><a href="./WebAppServer.html">WebAppServer</a></li>
 				
 				</ul>
 				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
@@ -163,11 +167,7 @@
 		<h1 class="class">UserRepository</h1>
 
 		<div id="description">
-			<p>
-To change this template, choose Tools | Templates and open the template in
-the editor.
-</p>
-
+			
 		</div>
 
 		<!-- Constants -->
@@ -202,10 +202,10 @@ the editor.
 					<div class="method-source-code"
 						id="new-source">
 <pre>
-   <span class="ruby-comment cmt"># File lib/class/user_repository.rb, line 5</span>
-5:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
-6:     
-7:   <span class="ruby-keyword kw">end</span></pre>
+   <span class="ruby-comment cmt"># File lib/class/user_repository.rb, line 7</span>
+7:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+8:     <span class="ruby-keyword kw">super</span>
+9:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

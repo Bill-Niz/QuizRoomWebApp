@@ -38,9 +38,6 @@
 				<div class="section-body">
 					<ul>
 					
-						<li><a href="./lib/main_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/main.rb">lib/main.rb</a></li>
-					
 						<li><a href="./pkg/QuizRoomWebApp-0_0_1/lib/main_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
 							class="thickbox" title="pkg/QuizRoomWebApp-0.0.1/lib/main.rb">pkg/QuizRoomWebApp-0.0.1/lib/main.rb</a></li>
 					
@@ -74,17 +71,9 @@
 					
 					<li><a href="#method-c-new">::new</a></li>
 					
-					<li><a href="#method-c-new">::new</a></li>
-					
-					<li><a href="#method-i-addData">#addData</a></li>
-					
 					<li><a href="#method-i-addData">#addData</a></li>
 					
 					<li><a href="#method-i-addDataChangedListener">#addDataChangedListener</a></li>
-					
-					<li><a href="#method-i-addDataChangedListener">#addDataChangedListener</a></li>
-					
-					<li><a href="#method-i-fireDataChanged">#fireDataChanged</a></li>
 					
 					<li><a href="#method-i-fireDataChanged">#fireDataChanged</a></li>
 					
@@ -146,6 +135,8 @@
 				
 					<li><a href="./ChannelRepository.html">ChannelRepository</a></li>
 				
+					<li><a href="./ChatServer.html">ChatServer</a></li>
+				
 					<li><a href="./ContentChanged.html">ContentChanged</a></li>
 				
 					<li><a href="./DataChangeListener.html">DataChangeListener</a></li>
@@ -158,15 +149,17 @@
 				
 					<li><a href="./MysqlHelper.html">MysqlHelper</a></li>
 				
-					<li><a href="./NewClassTest.html">NewClassTest</a></li>
-				
 					<li><a href="./Repository.html">Repository</a></li>
 				
 					<li><a href="./Test.html">Test</a></li>
 				
+					<li><a href="./ThreadRepository.html">ThreadRepository</a></li>
+				
 					<li><a href="./User.html">User</a></li>
 				
 					<li><a href="./UserRepository.html">UserRepository</a></li>
+				
+					<li><a href="./WebAppServer.html">WebAppServer</a></li>
 				
 				</ul>
 				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
@@ -193,41 +186,6 @@
 		
 		<div id="public-class-method-details" class="method-section section">
 			<h3 class="section-header">Public Class Methods</h3>
-
-		
-			<div id="new-method" class="method-detail ">
-				<a name="method-c-new"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">new</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					
-					
-
-					
-					<div class="method-source-code"
-						id="new-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/main.rb, line 27</span>
-27:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>()
-28:     <span class="ruby-ivar">@listListener</span> = []
-29:     <span class="ruby-ivar">@data</span> = []
-30:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
 
 		
 			<div id="new-method" class="method-detail ">
@@ -306,82 +264,6 @@
 			</div>
 
 		
-			<div id="add-ata-method" class="method-detail ">
-				<a name="method-i-addData"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">addData</span><span
-						class="method-args">(data)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					<pre>
- 
-</pre>
-<p>
-addData
-</p>
-<pre>
- </pre>
-					
-
-					
-					<div class="method-source-code"
-						id="add-ata-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/main.rb, line 51</span>
-51:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">addData</span> (<span class="ruby-identifier">data</span>)
-52:     <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">data</span>)
-53:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">fireDataChanged</span>(<span class="ruby-ivar">@data</span>)
-54:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
-
-		
-			<div id="add-ata-hanged-istener-method" class="method-detail ">
-				<a name="method-i-addDataChangedListener"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">addDataChangedListener</span><span
-						class="method-args">(listener)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					
-					
-
-					
-					<div class="method-source-code"
-						id="add-ata-hanged-istener-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/main.rb, line 34</span>
-34:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">addDataChangedListener</span>(<span class="ruby-identifier">listener</span>)
-35:     <span class="ruby-ivar">@listListener</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">listener</span>)
-36:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
-
-		
 			<div id="add-ata-hanged-istener-method" class="method-detail ">
 				<a name="method-i-addDataChangedListener"></a>
 
@@ -437,45 +319,6 @@ addData
 						id="fire-ata-hanged-source">
 <pre>
     <span class="ruby-comment cmt"># File pkg/QuizRoomWebApp-0.0.1/lib/main.rb, line 40</span>
-40:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fireDataChanged</span>(<span class="ruby-identifier">data</span>)
-41:     
-42:     <span class="ruby-ivar">@listListener</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">listener</span><span class="ruby-operator">|</span>  
-43:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">DataChangeListener</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">listener</span>.<span class="ruby-identifier">class</span>
-44:         <span class="ruby-identifier">listener</span>.<span class="ruby-identifier">onDataChanged</span>(<span class="ruby-keyword kw">self</span>,<span class="ruby-identifier">data</span>)
-45:       <span class="ruby-keyword kw">end</span>
-46:       }
-47:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
-
-		
-			<div id="fire-ata-hanged-method" class="method-detail ">
-				<a name="method-i-fireDataChanged"></a>
-
-				<div class="method-heading">
-				
-					<span class="method-name">fireDataChanged</span><span
-						class="method-args">(data)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					
-					
-
-					
-					<div class="method-source-code"
-						id="fire-ata-hanged-source">
-<pre>
-    <span class="ruby-comment cmt"># File lib/main.rb, line 40</span>
 40:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fireDataChanged</span>(<span class="ruby-identifier">data</span>)
 41:     
 42:     <span class="ruby-ivar">@listListener</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">listener</span><span class="ruby-operator">|</span>  

@@ -1,5 +1,7 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
+require "dbi"
+
 
 class MysqlHelper
   def initialize
@@ -112,4 +114,5 @@ class MysqlHelper
     return success
     
   end
+  
 end

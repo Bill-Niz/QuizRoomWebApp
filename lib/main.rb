@@ -30,3 +30,19 @@ u = Hash["email" => "user@mail.com",
 j = u.to_json
 puts j
 
+class Test
+  def initialize
+    
+    @t = true
+    h
+    
+  end
+  
+  def h
+    @t
+  end
+end
+
+te = Test.new
+
+puts te.h

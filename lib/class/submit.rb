@@ -1,5 +1,7 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
+$:.unshift File.join(File.dirname(__FILE__),'..','class')
+load "mysql_helper.rb"
 class Submit
   
   ##
@@ -9,7 +11,7 @@ class Submit
   # userData = {"email" => "user@mail.com",
   #             "password" => "sha512",
   #             "lastname" => "name",
-  #             "lastname" => "lastname",
+  #             "firstname" => "lastname",
   #             "birthdate" => "10/10/1989",
   #             "uuid" => "UUID"
   #             
@@ -20,7 +22,7 @@ class Submit
   # userData = {"email" => "user@mail.com",
   #             "password" => "sha512",
   #             "lastname" => "name",
-  #             "lastname" => "lastname",
+  #             "firstname" => "lastname",
   #             "birthdate" => "10/10/1989",
   #             "uuid" => "UUID",
   #             "facebook_id" => "fb_id"
@@ -39,6 +41,7 @@ class Submit
     @userData = data
     @method = method
     @mysqlHelper = MysqlHelper.new
+    
     
   end
   
@@ -67,9 +70,11 @@ class Submit
           else
             SUCCESS_USER_REGISTERED
      end
+     
       else
         ERROR_USER_EXIST
       end
+      
     when "normal"
       
       unless @mysqlHelper.insertUser(@userData['email'], 

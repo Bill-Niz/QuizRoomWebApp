@@ -18,6 +18,7 @@ class MysqlHelper
     @dataBase = db
     @dbh
     @connected = false
+    
   end
   
   
@@ -29,21 +30,12 @@ class MysqlHelper
   def connect
     
     if !self.connected?
-    begin
+   
      # connect to the MySQL server
-     dbh = DBI.connect("DBI:Mysql:#{@dataBase}:#{@host}", 
+     @dbh = DBI.connect("DBI:Mysql:#{@dataBase}:#{@host}", 
 	                    "#{@user}", "#{@password}")
      @connected=true
     
-    rescue DBI::DatabaseError => e
-     puts "An error occurred"
-     puts "Error code:    #{e.err}"
-     puts "Error message: #{e.errstr}"
-    ensure
-     # disconnect from server
-     dbh.disconnect if dbh
-     @connected=false
-    end
   end
   end
   
@@ -67,11 +59,14 @@ class MysqlHelper
   #
   ##
   def isInDB(table,column,dataToCheck)
+    
+    begin
+    
     query = "SELECT ? FROM ? WHERE ? = ?"
     isIn = false
     self.connect unless self.connected?  # => connect to the DB server if not connected
     
-    sth =@dbh.prepare(query)
+    sth = @dbh.prepare(query)
     
     sth.execute(column,table,column,dataToCheck)
     
@@ -79,10 +74,21 @@ class MysqlHelper
       isIn = true
     end
     sth.finish
-    
     puts "Record has been created"
-    @dbh.disconnect
-    isIn
+    
+    return isIn
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+     return isIn
+    end
+      
   end
   
   ##
@@ -103,7 +109,7 @@ class MysqlHelper
     sth.execute(email,password,lastname,firstname,birthdate,uuid,fbid,access_token,access_token_expiration)
     sth.finish
     @dbh.commit
-    @dbh.disconnect
+   
     puts "User has been created"
     success = true
     rescue DBI::DatabaseError => e
@@ -113,7 +119,8 @@ class MysqlHelper
      @dbh.rollback
     ensure
      # disconnect from server
-     @dbh.disconnect if @dbh
+     @dbh.disconnect if @connected
+     @connected=false
      success = false
     end
     

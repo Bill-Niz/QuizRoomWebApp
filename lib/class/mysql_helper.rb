@@ -62,32 +62,37 @@ class MysqlHelper
     
     begin
     
-    query = "SELECT ? FROM ? WHERE ? = ?"
-    isIn = false
+    query = "SELECT * FROM `user` WHERE `email` = ?"
+    isIn = true
     self.connect unless self.connected?  # => connect to the DB server if not connected
     
     sth = @dbh.prepare(query)
     
-    sth.execute(column,table,column,dataToCheck)
+    sth.execute(dataToCheck)
+    count=0
+     sth.fetch { |row|  
+       puts row[0]
+       count+=1
+     } 
+      isIn = false if count==0
+      puts count
     
-    if sth.size >=1
-      isIn = true
-    end
     sth.finish
-    puts "Record has been created"
     
-    return isIn
     rescue DBI::DatabaseError => e
      puts "An error occurred"
      puts "Error code:    #{e.err}"
      puts "Error message: #{e.errstr}"
      @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
     ensure
      # disconnect from server
      @dbh.disconnect if @connected
      @connected=false
-     return isIn
     end
+    return isIn
       
   end
   
@@ -117,11 +122,12 @@ class MysqlHelper
      puts "Error code:    #{e.err}"
      puts "Error message: #{e.errstr}"
      @dbh.rollback
+     rescue Exception => e  
+      puts "error!!! -> #{e.to_s}"
     ensure
      # disconnect from server
      @dbh.disconnect if @connected
      @connected=false
-     success = false
     end
     
     return success

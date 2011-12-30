@@ -52,7 +52,7 @@ class Submit
     
     case @method
     when "facebook"
-      
+     
       if !checkUser
         
       
@@ -62,9 +62,9 @@ class Submit
                               @userData['firstname'], 
                               @userData['birthdate'], 
                               @userData['uuid'],
-                              '', 
-                              '', 
-                              '') 
+                              @userData['facebook_id'], 
+                              @userData['access_token'], 
+                              @userData['access_token_expiration'])
                             then
                             ERROR_USER_NOT_REGISTERED
           else
@@ -77,19 +77,23 @@ class Submit
       
     when "normal"
       
+      if !checkUser
       unless @mysqlHelper.insertUser(@userData['email'], 
                               @userData['password'],
                               @userData['lastname'], 
                               @userData['firstname'], 
                               @userData['birthdate'], 
                               @userData['uuid'],
-                              @userData['facebook_id'], 
-                              @userData['access_token'], 
-                              @userData['access_token_expiration'])
+                              '', 
+                              '', 
+                              '') 
                             then
                             ERROR_USER_NOT_REGISTERED
       else
         SUCCESS_USER_REGISTERED
+      end
+      else
+        ERROR_USER_EXIST
       end
       
     else
@@ -102,7 +106,6 @@ class Submit
   ##
   def checkUser
     
-    @mysqlHelper.connect
     @mysqlHelper.isInDB(MysqlHelper::USER_TABLE, "email", @userData['email'])
   end
   

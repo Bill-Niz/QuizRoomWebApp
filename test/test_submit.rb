@@ -17,7 +17,7 @@ class TestSubmit < Test::Unit::TestCase
     userNormal = Hash["email" => "user@mail.com",
                      "password" => "sha512",
                      "lastname" => "name",
-                     "firtname" => "lastname",
+                     "firstname" => "lastname",
                      "birthdate" => "2011-12-23 23:23:29",
                      "uuid" => "UUID"
                      ]
@@ -28,20 +28,20 @@ class TestSubmit < Test::Unit::TestCase
                      "firstname" => "lastname",
                      "birthdate" => "2011-12-23 23:23:29",
                      "uuid" => "UUID",
-                     "facebook_id" => "12345",
+                     "facebook_id" => 12345,
                      "access_token" => "token",
-                     "access_token_expiration" => "token_expiration"]
+                     "access_token_expiration" => "2011-12-23 23:23:29"]
     
      
     normalSub = Submit.new(userNormal, 'normal')
     fbSub = Submit.new(userFb, 'facebook')
     assert_not_nil(fbSub)
     assert_not_nil(normalSub)
+    #assert_equal('{"succes":"ok"}',normalSub.proceedSubmit)
+    assert_equal('{"succes":"ok"}',fbSub.proceedSubmit)
     
-    assert_equal(false,normalSub.checkUser)
-    assert_equal(false,fbSub.checkUser)
-    
-     assert_equal('{"succes":"ok"}',normalSub.proceedSubmit)
+    #assert_equal('{"succes":"ok"}',normalSub.proceedSubmit)
+    #assert_equal('{"succes":"ok"}',normalSub.fbSub)
   
   end
 end

@@ -18,16 +18,18 @@ class WebAppSubmit < Sinatra::Base
       
       case params[:method]
       when 'facebook'
-        
-        puts params[:method]
-        '{"state":"success"}'
+        #TODO Check DATA validity!
+        s = Submit.new(data, 'facebook')
+        s.proceedSubmit
        
       when 'normal'
-        #puts data
-        '{"state":"success"}'
+        #TODO Check DATA validity!
+         s = Submit.new(data, 'normal')
+         s.proceedSubmit
         
       else
-        '{"error":"Unknow method : #{params[:method]}"}'
+        '{"error":"Unknow method",
+          "messafe":"Unknow method; Should be "facebook" or "normal""}'
         
       end
      

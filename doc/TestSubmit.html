@@ -5,7 +5,7 @@
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
-	<title>Class: Test</title>
+	<title>Class: TestSubmit</title>
 
 	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
 
@@ -38,8 +38,8 @@
 				<div class="section-body">
 					<ul>
 					
-						<li><a href="./pkg/QuizRoomWebApp-0_0_1/lib/main_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="pkg/QuizRoomWebApp-0.0.1/lib/main.rb">pkg/QuizRoomWebApp-0.0.1/lib/main.rb</a></li>
+						<li><a href="./test/test_submit_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="test/test_submit.rb">test/test_submit.rb</a></li>
 					
 					</ul>
 				</div>
@@ -55,7 +55,7 @@
 			<div id="parent-class-section" class="section">
 				<h3 class="section-header">Parent</h3>
 				
-				<p class="link">Object</p>
+				<p class="link">Test::Unit::TestCase</p>
 				
 			</div>
 			
@@ -69,26 +69,15 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#method-c-new">::new</a></li>
+					<li><a href="#method-i-test_checkUser">#test_checkUser</a></li>
 					
-					<li><a href="#method-i-onDataChanged">#onDataChanged</a></li>
+					<li><a href="#method-i-test_foo">#test_foo</a></li>
 					
 				</ul>
 			</div>
 			
 
 			<!-- Included Modules -->
-			
-			<div id="includes-section" class="section">
-				<h3 class="section-header">Included Modules</h3>
-				<ul class="link-list">
-				
-				
-					<li><a class="include" href="DataChangeListener.html">DataChangeListener</a></li>
-				
-				
-				</ul>
-			</div>
 			
 		</div>
 
@@ -187,7 +176,7 @@
 	</div>
 
 	<div id="documentation">
-		<h1 class="class">Test</h1>
+		<h1 class="class">TestSubmit</h1>
 
 		<div id="description">
 			
@@ -201,17 +190,17 @@
 
 		<!-- Methods -->
 		
-		<div id="public-class-method-details" class="method-section section">
-			<h3 class="section-header">Public Class Methods</h3>
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
 
 		
-			<div id="new-method" class="method-detail ">
-				<a name="method-c-new"></a>
+			<div id="test-check-ser-method" class="method-detail ">
+				<a name="method-i-test_checkUser"></a>
 
 				<div class="method-heading">
 				
-					<span class="method-name">new</span><span
-						class="method-args">(s)</span>
+					<span class="method-name">test_checkUser</span><span
+						class="method-args">()</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -223,13 +212,36 @@
 
 					
 					<div class="method-source-code"
-						id="new-source">
+						id="test-check-ser-source">
 <pre>
-    <span class="ruby-comment cmt"># File pkg/QuizRoomWebApp-0.0.1/lib/main.rb, line 67</span>
-67:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">s</span>)
-68:     <span class="ruby-ivar">@dataS</span> = <span class="ruby-identifier">s</span>
-69:     <span class="ruby-ivar">@dataS</span>.<span class="ruby-identifier">addDataChangedListener</span>(<span class="ruby-keyword kw">self</span>)
-70:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File test/test_submit.rb, line 16</span>
+16:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_checkUser</span>
+17:     <span class="ruby-identifier">userNormal</span> = <span class="ruby-constant">Hash</span>[<span class="ruby-value str">&quot;email&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;user@mail.com&quot;</span>,
+18:                      <span class="ruby-value str">&quot;password&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;sha512&quot;</span>,
+19:                      <span class="ruby-value str">&quot;lastname&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;name&quot;</span>,
+20:                      <span class="ruby-value str">&quot;firstname&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;lastname&quot;</span>,
+21:                      <span class="ruby-value str">&quot;birthdate&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;2011-12-23 23:23:29&quot;</span>,
+22:                      <span class="ruby-value str">&quot;uuid&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;UUID&quot;</span>
+23:                      ]
+24:                    
+25:      <span class="ruby-identifier">userFb</span> = <span class="ruby-constant">Hash</span>[<span class="ruby-value str">&quot;email&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;userFB@mail.com&quot;</span>,
+26:                      <span class="ruby-value str">&quot;password&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;sha512&quot;</span>,
+27:                      <span class="ruby-value str">&quot;lastname&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;name&quot;</span>,
+28:                      <span class="ruby-value str">&quot;firstname&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;lastname&quot;</span>,
+29:                      <span class="ruby-value str">&quot;birthdate&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;2011-12-23 23:23:29&quot;</span>,
+30:                      <span class="ruby-value str">&quot;uuid&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;UUID&quot;</span>,
+31:                      <span class="ruby-value str">&quot;facebook_id&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">12345</span>,
+32:                      <span class="ruby-value str">&quot;access_token&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;token&quot;</span>,
+33:                      <span class="ruby-value str">&quot;access_token_expiration&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;2011-12-23 23:23:29&quot;</span>]
+34:     
+35:      
+36:     <span class="ruby-identifier">normalSub</span> = <span class="ruby-constant">Submit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">userNormal</span>, <span class="ruby-value str">'normal'</span>)
+37:     <span class="ruby-identifier">fbSub</span> = <span class="ruby-constant">Submit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">userFb</span>, <span class="ruby-value str">'facebook'</span>)
+38:     <span class="ruby-identifier">assert_not_nil</span>(<span class="ruby-identifier">fbSub</span>)
+39:     <span class="ruby-identifier">assert_not_nil</span>(<span class="ruby-identifier">normalSub</span>)
+40:     <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value str">'{&quot;succes&quot;:&quot;ok&quot;}'</span>,<span class="ruby-identifier">normalSub</span>.<span class="ruby-identifier">proceedSubmit</span>)
+41:     <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value str">'{&quot;succes&quot;:&quot;ok&quot;}'</span>,<span class="ruby-identifier">fbSub</span>.<span class="ruby-identifier">proceedSubmit</span>) 
+42:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -240,19 +252,13 @@
 			</div>
 
 		
-		</div>
-	
-		<div id="public-instance-method-details" class="method-section section">
-			<h3 class="section-header">Public Instance Methods</h3>
-
-		
-			<div id="on-ata-hanged-method" class="method-detail ">
-				<a name="method-i-onDataChanged"></a>
+			<div id="test-foo-method" class="method-detail ">
+				<a name="method-i-test_foo"></a>
 
 				<div class="method-heading">
 				
-					<span class="method-name">onDataChanged</span><span
-						class="method-args">(source,data)</span>
+					<span class="method-name">test_foo</span><span
+						class="method-args">()</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -264,12 +270,14 @@
 
 					
 					<div class="method-source-code"
-						id="on-ata-hanged-source">
+						id="test-foo-source">
 <pre>
-    <span class="ruby-comment cmt"># File pkg/QuizRoomWebApp-0.0.1/lib/main.rb, line 72</span>
-72:    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">onDataChanged</span>(<span class="ruby-identifier">source</span>,<span class="ruby-identifier">data</span>)
-73:      <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Datachaged! &gt; &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">to_s</span> 
-74:    <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File test/test_submit.rb, line 10</span>
+10:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_foo</span>
+11:     <span class="ruby-comment cmt">#TODO: Write test</span>
+12:     <span class="ruby-comment cmt">#flunk &quot;TODO: Write test&quot;</span>
+13:     <span class="ruby-comment cmt"># assert_equal(&quot;foo&quot;, bar)</span>
+14:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

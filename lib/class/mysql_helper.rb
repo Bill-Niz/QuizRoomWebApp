@@ -62,7 +62,7 @@ class MysqlHelper
     
     begin
     
-    query = "SELECT * FROM `user` WHERE `email` = ?"
+    query = "SELECT * FROM `#{table}` WHERE `#{column}` = ?"
     isIn = true
     self.connect unless self.connected?  # => connect to the DB server if not connected
     
@@ -115,7 +115,6 @@ class MysqlHelper
     sth.finish
     @dbh.commit
    
-    puts "User has been created"
     success = true
     rescue DBI::DatabaseError => e
      puts "An error occurred"

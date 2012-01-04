@@ -37,11 +37,7 @@ class TestSubmit < Test::Unit::TestCase
     fbSub = Submit.new(userFb, 'facebook')
     assert_not_nil(fbSub)
     assert_not_nil(normalSub)
-    #assert_equal('{"succes":"ok"}',normalSub.proceedSubmit)
-    assert_equal('{"succes":"ok"}',fbSub.proceedSubmit)
-    
-    #assert_equal('{"succes":"ok"}',normalSub.proceedSubmit)
-    #assert_equal('{"succes":"ok"}',normalSub.fbSub)
-  
+    assert_equal('{"succes":"ok"}',normalSub.proceedSubmit)
+    assert_equal('{"succes":"ok"}',fbSub.proceedSubmit) 
   end
 end

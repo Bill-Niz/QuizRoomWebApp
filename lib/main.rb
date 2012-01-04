@@ -19,30 +19,22 @@ load "class/chat_server.rb"
 
 
 
-u = Hash["email" => "user@mail.com",
-             "password" => "sha512",
-               "name" => "name",
-               "lastname" => "lastname",
-               "UUID" => "UUID"
-]
+u = Hash["email" => "userFB@mail.com",
+                     "password" => "sha512",
+                     "lastname" => "name",
+                     "firstname" => "lastname",
+                     "birthdate" => "2011-12-23 23:23:29",
+                     "uuid" => "UUID",
+                     "facebook_id" => 12345,
+                     "access_token" => "token",
+                     "access_token_expiration" => "2011-12-23 23:23:29"]
   #puts userData['email'] 
   
 j = u.to_json
-puts j
+puts u['password'] == nil
 
-class Test
-  def initialize
-    
-    @t = true
-    h
-    
-  end
-  
-  def h
-    @t
-  end
-end
 
-te = Test.new
-
-puts te.h
+#o =  [('a'..'z'),('A'..'Z'),(0..9)].map{|i| i.to_a}.flatten 
+#map =  (0..8).map{o[rand(o.length)]}.join;
+#
+#puts map

@@ -66,7 +66,21 @@ class ChatServer
   ##
   #
   ##
-  def sendToUser(fromIdUser,toIdUser)
+  def sendToUser(fromIdUser,toIdUser,msg)
+    @userList.getcontents.each { |user| 
+      if user.getId == toIdUser
+        user.receiveFromUser(fromIdUser, msg)
+        break
+      end
+      
+    }
+  end
+  
+  ##
+  #
+  # User Join a channel
+  ##
+  def joinChannel(idUser,idChannel)
     
   end
   
@@ -74,6 +88,7 @@ class ChatServer
   #
   ##
   def sendToChannel(fromIdUser,toIdChannel)
+    
   end
   ##
   #

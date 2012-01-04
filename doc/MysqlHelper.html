@@ -76,6 +76,14 @@
 					
 					<li><a href="#method-c-new">::new</a></li>
 					
+					<li><a href="#method-i-connect">#connect</a></li>
+					
+					<li><a href="#method-i-connected%3F">#connected?</a></li>
+					
+					<li><a href="#method-i-insertUser">#insertUser</a></li>
+					
+					<li><a href="#method-i-isInDB">#isInDB</a></li>
+					
 				</ul>
 			</div>
 			
@@ -90,6 +98,8 @@
 			<div id="fileindex-section" class="section project-section">
 				<h3 class="section-header">Files</h3>
 				<ul>
+				
+					<li class="file"><a href="./Gemfile.html">Gemfile</a></li>
 				
 					<li class="file"><a href="./LICENSE.html">LICENSE</a></li>
 				
@@ -136,6 +146,8 @@
 				
 					<li><a href="./ChatServer.html">ChatServer</a></li>
 				
+					<li><a href="./Config.html">Config</a></li>
+				
 					<li><a href="./ContentChanged.html">ContentChanged</a></li>
 				
 					<li><a href="./DataChangeListener.html">DataChangeListener</a></li>
@@ -150,7 +162,11 @@
 				
 					<li><a href="./Repository.html">Repository</a></li>
 				
+					<li><a href="./Submit.html">Submit</a></li>
+				
 					<li><a href="./Test.html">Test</a></li>
+				
+					<li><a href="./TestSubmit.html">TestSubmit</a></li>
 				
 					<li><a href="./ThreadRepository.html">ThreadRepository</a></li>
 				
@@ -159,6 +175,8 @@
 					<li><a href="./UserRepository.html">UserRepository</a></li>
 				
 					<li><a href="./WebAppServer.html">WebAppServer</a></li>
+				
+					<li><a href="./WebAppSubmit.html">WebAppSubmit</a></li>
 				
 				</ul>
 				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
@@ -176,14 +194,47 @@
 To change this template, choose Tools | Templates and open the template in
 the editor.
 </p>
-<hr style="height: 1px"></hr><p>
-To change this template, choose Tools | Templates and open the template in
-the editor.
-</p>
 
 		</div>
 
 		<!-- Constants -->
+		
+		<div id="constants-list" class="section">
+			<h3 class="section-header">Constants</h3>
+			<dl>
+			
+				<dt><a name="DB_NAME">DB_NAME</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+				<dt><a name="USER_TABLE">USER_TABLE</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+				<dt><a name="CHANNEL_TABLE">CHANNEL_TABLE</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+				<dt><a name="CLIENT_DB_USER">CLIENT_DB_USER</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+				<dt><a name="CLIENT_DB_PASSWORD">CLIENT_DB_PASSWORD</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+				<dt><a name="DB_ADRESS">DB_ADRESS</a></dt>
+				
+				<dd class="description"></dd>
+				
+			
+			</dl>
+		</div>
 		
 
 		<!-- Attributes -->
@@ -201,7 +252,7 @@ the editor.
 				<div class="method-heading">
 				
 					<span class="method-name">new</span><span
-						class="method-args">()</span>
+						class="method-args">(host=DB_ADRESS,user=CLIENT_DB_USER,password=CLIENT_DB_PASSWORD,db=DB_NAME)</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -215,10 +266,16 @@ the editor.
 					<div class="method-source-code"
 						id="new-source">
 <pre>
-   <span class="ruby-comment cmt"># File lib/class/mysql_helper.rb, line 5</span>
-5:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
-6:     
-7:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/class/mysql_helper.rb, line 14</span>
+14:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">host</span>=<span class="ruby-constant">DB_ADRESS</span>,<span class="ruby-identifier">user</span>=<span class="ruby-constant">CLIENT_DB_USER</span>,<span class="ruby-identifier">password</span>=<span class="ruby-constant">CLIENT_DB_PASSWORD</span>,<span class="ruby-identifier">db</span>=<span class="ruby-constant">DB_NAME</span>)
+15:     <span class="ruby-ivar">@host</span> = <span class="ruby-identifier">host</span>
+16:     <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
+17:     <span class="ruby-ivar">@password</span> = <span class="ruby-identifier">password</span>
+18:     <span class="ruby-ivar">@dataBase</span> = <span class="ruby-identifier">db</span>
+19:     <span class="ruby-ivar">@dbh</span>
+20:     <span class="ruby-ivar">@connected</span> = <span class="ruby-keyword kw">false</span>
+21:     
+22:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -253,6 +310,236 @@ the editor.
 5:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
 6:     
 7:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="connect-method" class="method-detail ">
+				<a name="method-i-connect"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">connect</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Connection to the DB server
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="connect-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/mysql_helper.rb, line 30</span>
+30:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">connect</span>
+31:     
+32:     <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">connected?</span>
+33:    
+34:      <span class="ruby-comment cmt"># connect to the MySQL server</span>
+35:      <span class="ruby-ivar">@dbh</span> = <span class="ruby-constant">DBI</span>.<span class="ruby-identifier">connect</span>(<span class="ruby-node">&quot;DBI:Mysql:#{@dataBase}:#{@host}&quot;</span>, 
+36:                             <span class="ruby-node">&quot;#{@user}&quot;</span>, <span class="ruby-node">&quot;#{@password}&quot;</span>)
+37:      <span class="ruby-ivar">@connected</span>=<span class="ruby-keyword kw">true</span>
+38:     
+39:   <span class="ruby-keyword kw">end</span>
+40:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="connected--method" class="method-detail ">
+				<a name="method-i-connected%3F"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">connected?</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Check if we are connected to the  DB server
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="connected--source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/mysql_helper.rb, line 47</span>
+47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">connected?</span>
+48:     <span class="ruby-ivar">@connected</span>
+49:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="insert-ser-method" class="method-detail ">
+				<a name="method-i-insertUser"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">insertUser</span><span
+						class="method-args">(email,password,lastname,firstname,birthdate,uuid,fbid,access_token,access_token_expiration)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Inster user into the DB
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="insert-ser-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/class/mysql_helper.rb, line 103</span>
+103:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">insertUser</span>(<span class="ruby-identifier">email</span>,<span class="ruby-identifier">password</span>,<span class="ruby-identifier">lastname</span>,<span class="ruby-identifier">firstname</span>,<span class="ruby-identifier">birthdate</span>,<span class="ruby-identifier">uuid</span>,<span class="ruby-identifier">fbid</span>,<span class="ruby-identifier">access_token</span>,<span class="ruby-identifier">access_token_expiration</span>)
+104:     <span class="ruby-keyword kw">begin</span>
+105:     <span class="ruby-identifier">success</span>= <span class="ruby-keyword kw">false</span>
+106:     <span class="ruby-identifier">query</span> = <span class="ruby-value str">&quot;INSERT INTO `QuizRoom`.`user` (`email`, `password`, `last_name`, 
+107:                                             `first_name`, `birthdate`, `uuid`,
+108:                                             `facebook_id`, `access_token`, 
+109:                                             `access_token_expiration`) 
+110:                                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)&quot;</span>
+111:     
+112:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">connect</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">connected?</span>  <span class="ruby-comment cmt"># =&gt; connect to the DB server if not connected</span>
+113:     <span class="ruby-identifier">sth</span> =<span class="ruby-ivar">@dbh</span>.<span class="ruby-identifier">prepare</span>(<span class="ruby-identifier">query</span>)
+114:     <span class="ruby-identifier">sth</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-identifier">email</span>,<span class="ruby-identifier">password</span>,<span class="ruby-identifier">lastname</span>,<span class="ruby-identifier">firstname</span>,<span class="ruby-identifier">birthdate</span>,<span class="ruby-identifier">uuid</span>,<span class="ruby-identifier">fbid</span>,<span class="ruby-identifier">access_token</span>,<span class="ruby-identifier">access_token_expiration</span>)
+115:     <span class="ruby-identifier">sth</span>.<span class="ruby-identifier">finish</span>
+116:     <span class="ruby-ivar">@dbh</span>.<span class="ruby-identifier">commit</span>
+117:    
+118:     <span class="ruby-identifier">success</span> = <span class="ruby-keyword kw">true</span>
+119:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">DBI</span><span class="ruby-operator">::</span><span class="ruby-constant">DatabaseError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+120:      <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;An error occurred&quot;</span>
+121:      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Error code:    #{e.err}&quot;</span>
+122:      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Error message: #{e.errstr}&quot;</span>
+123:      <span class="ruby-ivar">@dbh</span>.<span class="ruby-identifier">rollback</span>
+124:      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>  
+125:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;error!!! -&gt; #{e.to_s}&quot;</span>
+126:     <span class="ruby-keyword kw">ensure</span>
+127:      <span class="ruby-comment cmt"># disconnect from server</span>
+128:      <span class="ruby-ivar">@dbh</span>.<span class="ruby-identifier">disconnect</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@connected</span>
+129:      <span class="ruby-ivar">@connected</span>=<span class="ruby-keyword kw">false</span>
+130:     <span class="ruby-keyword kw">end</span>
+131:     
+132:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">success</span>
+133:     
+134:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="is-n--method" class="method-detail ">
+				<a name="method-i-isInDB"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">isInDB</span><span
+						class="method-args">(table,column,dataToCheck)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<pre>
+ 
+</pre>
+<p>
+Check if a data is in DB
+</p>
+<pre>
+ * table : the table where data is
+ * column : the column name to checke
+ * dataToCheck : the data that have to be compared
+
+ </pre>
+					
+
+					
+					<div class="method-source-code"
+						id="is-n--source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/class/mysql_helper.rb, line 61</span>
+61:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">isInDB</span>(<span class="ruby-identifier">table</span>,<span class="ruby-identifier">column</span>,<span class="ruby-identifier">dataToCheck</span>)
+62:     
+63:     <span class="ruby-keyword kw">begin</span>
+64:     
+65:     <span class="ruby-identifier">query</span> = <span class="ruby-value str">&quot;SELECT * FROM `user` WHERE `email` = ?&quot;</span>
+66:     <span class="ruby-identifier">isIn</span> = <span class="ruby-keyword kw">true</span>
+67:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">connect</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">connected?</span>  <span class="ruby-comment cmt"># =&gt; connect to the DB server if not connected</span>
+68:     
+69:     <span class="ruby-identifier">sth</span> = <span class="ruby-ivar">@dbh</span>.<span class="ruby-identifier">prepare</span>(<span class="ruby-identifier">query</span>)
+70:     
+71:     <span class="ruby-identifier">sth</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-identifier">dataToCheck</span>)
+72:     <span class="ruby-identifier">count</span>=<span class="ruby-value">0</span>
+73:      <span class="ruby-identifier">sth</span>.<span class="ruby-identifier">fetch</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>  
+74:        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">row</span>[<span class="ruby-value">0</span>]
+75:        <span class="ruby-identifier">count</span><span class="ruby-operator">+=</span><span class="ruby-value">1</span>
+76:      } 
+77:       <span class="ruby-identifier">isIn</span> = <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">count</span><span class="ruby-operator">==</span><span class="ruby-value">0</span>
+78:       <span class="ruby-identifier">puts</span> <span class="ruby-identifier">count</span>
+79:     
+80:     <span class="ruby-identifier">sth</span>.<span class="ruby-identifier">finish</span>
+81:     
+82:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">DBI</span><span class="ruby-operator">::</span><span class="ruby-constant">DatabaseError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+83:      <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;An error occurred&quot;</span>
+84:      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Error code:    #{e.err}&quot;</span>
+85:      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Error message: #{e.errstr}&quot;</span>
+86:      <span class="ruby-ivar">@dbh</span>.<span class="ruby-identifier">rollback</span>
+87:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>  
+88:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;error!!! -&gt; : #{e.to_s}&quot;</span>
+89:     
+90:     <span class="ruby-keyword kw">ensure</span>
+91:      <span class="ruby-comment cmt"># disconnect from server</span>
+92:      <span class="ruby-ivar">@dbh</span>.<span class="ruby-identifier">disconnect</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@connected</span>
+93:      <span class="ruby-ivar">@connected</span>=<span class="ruby-keyword kw">false</span>
+94:     <span class="ruby-keyword kw">end</span>
+95:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">isIn</span>
+96:       
+97:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

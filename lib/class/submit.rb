@@ -84,9 +84,9 @@ class Submit
                               @userData['firstname'], 
                               @userData['birthdate'], 
                               @userData['uuid'],
-                              '', 
-                              '', 
-                              '') 
+                              nil, 
+                              nil, 
+                              nil) 
                             then
                             ERROR_USER_NOT_REGISTERED
       else
@@ -99,6 +99,7 @@ class Submit
     else
       ERROR_UNKNOWN_METHOD
     end
+      
   end
 
   ##

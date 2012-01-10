@@ -2,16 +2,20 @@
 # and open the template in the editor.
 $:.unshift File.join(File.dirname(__FILE__),'..','lib')
 
-class Config
-  
-  DB_NAME = "QuizRoom"  # => Data base Name
-  USER_TABLE = "user"   # => User table name in DB
-  CHANNEL_TABLE = "channel"
-  CLIENT_DB_USER = "QRClient"
-  CLIENT_DB_PASSWORD = "USVtPeTbMsxEcMmn"
-  DB_ADRESS = "localhost"
-  def initialize
-    
+require 'sinatra'
+
+#class Stream < Sinatra::Base
+  get '/' do
+    content_type :txt
+
+    stream do |out|
+      out << "It's gonna be legen -\n"
+      sleep 2
+      out << " (wait for it) \n"
+      sleep 5
+      out << "- dary!\n"
+    end
   end
-  
-end
+#end
+
+#run Stream

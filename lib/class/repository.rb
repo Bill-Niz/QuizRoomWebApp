@@ -12,44 +12,48 @@ class Repository
     @listeners = []
   end
   
-  ##
+  #
   # Add a new content in Array
-  ##
+  #
   def add(content)
     @contents << content
     self.fireContentsChanged(content)
     self.fireContentsAdded(content)
   end
-  ##
+  #
   # Remove the content passed in arg
-  ##
+  #
   def remove(content)
     @content.delete(content)
     self.fireContentsChanged(content)
     self.fireContentsChanged(content)
   end
-  ##
+  #
   # Get contents
-  ##
+  #
   def getcontents()
     @contents
   end
-  ##
+  #
   # Add listener to listner list
-  ##
+  #
   def addContentChangedListener(listener)
     
     @listeners << (listener)
   end
-  ##
+  #
   # Remove listener to listner list
-  ##
+  #
   def removeContentChangedListener(listener)
     @listeners.delete(listener)
   end
-  ##
+  
+  
+  
+  
+  #
   # Fire Contents changed event
-  ##
+  #
   def fireContentsChanged(data)
     @listeners.each() { |listener|  
       
@@ -59,9 +63,9 @@ class Repository
       }
     
   end
-  ##
+  #
   # Fire Contents added event
-  ##
+  #
   def fireContentsAdded(data)
     @listeners.each() { |listener|  
       
@@ -71,9 +75,9 @@ class Repository
       }
     
   end
-  ## 
+  #
   # Fire Contents removed event
-  ##
+  #
   def fireContentsRemoved(data)
     @listeners.each() { |listener|  
       
@@ -83,6 +87,7 @@ class Repository
       }
     
   end
+  
   
   
 end

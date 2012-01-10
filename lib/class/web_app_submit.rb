@@ -7,10 +7,15 @@ load 'submit.rb'
 ##
 # Handle users registration
 ##
+
 class WebAppSubmit < Sinatra::Base
   
  enable :sessions
- 
+ def initialize(app)
+      @app = app
+    end
+  
+   
   
   post '/submit/:method' do
       request.body.rewind
@@ -35,4 +40,7 @@ class WebAppSubmit < Sinatra::Base
      
       
    end
+   
+ run! if app_file == $0
 end
+

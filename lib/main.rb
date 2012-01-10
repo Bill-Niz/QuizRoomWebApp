@@ -9,15 +9,37 @@ load "class/channel_repository.rb"
 load "class/user_repository.rb"
 load "class/user.rb"
 load "class/chat_server.rb"
+load "class/chat_handler.rb"
 
 
-#w = WebAppServer.new(port=4444)
+
+
+w = WebAppServer.new(port=4444)
 
 
 #port = 4444
 #srv = ChatServer.new(port)
 
+user = Hash["uuid"=>"123456",
+            "lastname"=>"Doe",
+            "name"=>"Jhon",
+            "img_url"=>"http://pic.com/pic.png"
+]
+userList = []
+userList << user
+#userList <<  user
 
+channel = Hash["name"=>"Jeux",
+               "id"=>"456422",
+               "connected"=>"1",
+               "user_list"=>userList
+]
+
+channelList = []
+channelList << channel
+channelList << channel
+
+#puts channelList
 
 u = Hash["email" => "userFB@mail.com",
                      "password" => "sha512",
@@ -30,8 +52,9 @@ u = Hash["email" => "userFB@mail.com",
                      "access_token_expiration" => "2011-12-23 23:23:29"]
   #puts userData['email'] 
   
-j = u.to_json
-puts u['password'] == nil
+c= ChatHandler.new
+
+puts JSON c.getChannelList
 
 
 #o =  [('a'..'z'),('A'..'Z'),(0..9)].map{|i| i.to_a}.flatten 

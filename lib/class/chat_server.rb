@@ -19,6 +19,7 @@ class ChatServer
     
     @threads = ThreadRepository.new
     @threads.addContentChangedListener(self)
+    @mysqlHelper = MysqlHelper.new
     @server = @server = TCPServer.open(@port)
     
     @ssl_context = OpenSSL::SSL::SSLContext.new()
@@ -34,13 +35,16 @@ class ChatServer
     
   end
   
-  
+  #
+  #
+  #
   def run
    
    loop {
      begin
+       puts "Chat Server Started at #{Time.now} on Port : #{@port}"
       @threads.add(Thread.new(@ssl_socket.accept,@userList) { |socket, userList|
-          puts "log: Connection from #{socket.peeraddr[2]} at
+          puts "Log: Connection from #{socket.peeraddr[2]} at
           #{socket.peeraddr[3]}"
           user = User.new(socket,self)
           userList.add(user)
@@ -56,16 +60,17 @@ class ChatServer
      end
 }
   end
-  ##
   #
-  ##
+  #
+  #
   def loadChannelList
-    @channelList.add(Channel.new)
+    @mysqlHelper.getChannelList.each { |chan| 
+      @channelList.add(Channel.new(chan["name"],chan["id"]))
+    }
   end
-  
-  ##
   #
-  ##
+  #
+  #
   def sendToUser(fromIdUser,toIdUser,msg)
     @userList.getcontents.each { |user| 
       if user.getId == toIdUser
@@ -75,31 +80,48 @@ class ChatServer
       
     }
   end
-  
-  ##
   #
   # User Join a channel
-  ##
-  def joinChannel(idUser,idChannel)
-    
-  end
-  
-  ##
   #
-  ##
-  def sendToChannel(fromIdUser,toIdChannel)
+  def joinChannel(user,idChannel)
     
+    getChannelById(idChannel).join(user)
   end
-  ##
   #
-  ##
+  # User Join a channel
+  #
+  def quitChannel(user,idChannel)
+    
+    getChannelById(idChannel).remove(user)
+  end
+  #
+  # Send data the channel from an user
+  #
+  def sendToChannel(fromIdUser,toIdChannel,msg)
+    getChannelById(toIdChannel).send(fromIdUser, msg)
+  end
+  #
+  #
+  #
+  def getChannelById(id)
+    @channelList.getcontents.each { |chan| 
+    
+      if(chan.getId == idChannel)
+        return chan
+        
+      end
+    }
+  end
+  #
+  #
+  #
   def onContentChanged(source,data)
     
     case source
     when @userList
       puts "user Added \n"
     when @channelList
-      puts "Channel Added"
+      puts "Channel Added : #{data.to_s}"
     when @threads
       puts "Tread Added"
     else
@@ -107,11 +129,11 @@ class ChatServer
     end
     
   end
-  ##
   #
-  ##
+  #
+  #
   def onContentAdded(source,data)
-    puts source
+    
     case source
     when @userList
       puts "#{data.to_s} : Join the Server !"
@@ -123,11 +145,11 @@ class ChatServer
     end
     
   end
-  ##
   #
-  ##
-  def onContentRemoved(souce,data)
-    puts source
+  #
+  #
+  def onContentRemoved(source,data)
+    
     case source
     when @userList
       puts "#{data.to_s} : Quit the Server !"

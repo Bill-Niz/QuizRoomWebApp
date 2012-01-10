@@ -6,7 +6,9 @@ require 'webrick'
 require 'webrick/https'
 require 'openssl'
 require 'json'
-load 'web_app_submit.rb'
+require 'web_app_submit.rb'
+require 'class/chat_handler'
+
 
 
 
@@ -16,6 +18,7 @@ class WebAppServer < Sinatra::Base
     super(self)
     @port = port
     @CERT_PATH = cert_path
+    @mysqlHelper = MysqlHelper.new
     @webrick_options = {
         :Port               => @port,
         :Logger             => WEBrick::Log::new($stderr, WEBrick::Log::DEBUG),
@@ -31,8 +34,29 @@ class WebAppServer < Sinatra::Base
     
   end
   
-   use WebAppSubmit
+  use WebAppSubmit
    
+  #
+  # Logging section
+  #
+  before do
+    @start= Time.now
+    if(!request.path.include?'submit')
+      if(params["uuid"] == nil || !@mysqlHelper.isInDB(MysqlHelper::USER_TABLE, "uuid", params["uuid"]))
+        halt '{"error":"Unknow user",
+          "message":"Unknow uuid !"}'
+      end
+      
+    end
+        
+       
+  end
+  
+  after do
+    @end = Time.now
+    elps = ((@end-@start)*10000.0).to_int
+    puts "Request from #{request.ip} in #{elps}mns. Size : #{response.body}"
+  end
   
   
   
@@ -53,19 +77,35 @@ class WebAppServer < Sinatra::Base
         
       else
         '{"error":"Unknow method",
-          "messafe":"Unknow method; Should be "facebook" or "normal""}'
+          "message":"Unknow method; Should be "facebook" or "normal""}'
         
       end
      
       
    end
     
-    get '/' do
-      '<form action="/submit/facebook" method="post">
-      <input type="submit" value="Submit" />
-      </from>'
+   
+  
+  
+  get '/channel' do
+       
+    chatHandler = ChatHandler.new
+    JSON chatHandler.getChannelList
+     
+       
+       
+      
+       
     end
+  
     
+  
+  
+  
+  
+  
+  
+  
     get '/favicon.ico' do
       send_file "favicon.ico"
     end
@@ -79,12 +119,18 @@ class WebAppServer < Sinatra::Base
     'mais une '
   end
   
-  get '/*.*' do |chemin, ext|
-    [chemin, ext] # => ["path/to/file", "xml"]
-  end
+  get '/telecharger/*.*' do
+  # répond à /telecharger/chemin/vers/fichier.xml
+  params[:splat] # => ["chemin/vers/fichier", "xml"]
+end
+  
+  
+  
+  
   
   get '/*'  do
-    "error"
+    puts request.path.include?'submit'
+    "Unknow path!!"
   end
   
   post '/*'  do

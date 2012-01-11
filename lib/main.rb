@@ -21,7 +21,7 @@ load "class/chat_handler.rb"
 
 m = MysqlHelper.new(MysqlHelper::DB_ADRESS,"root","root",MysqlHelper::DB_NAME)
 #m.deleteDisConUseré(4, 3)
-m.insertConUser(5, 2)
+m.insertConUser(5, 1)
 
 u = Hash["email" => "userFB@mail.com",
                      "password" => "sha512",

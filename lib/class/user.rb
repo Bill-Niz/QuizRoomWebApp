@@ -29,6 +29,7 @@ class User
   NOK = "500/NOK"
   
   def initialize(socket,chatServer)
+    @uuid = ""
     @id = ""
     @socket = socket
     @chatServer = chatServer
@@ -36,6 +37,7 @@ class User
     @connected = true
     @logged = false         # => know if user is authentified
     @isActive = true       # => user connected but the app is in background
+    
     @thread = repeat_every(5) do
   @socket.puts(Time.now.ctime)
 end  
@@ -85,7 +87,7 @@ end
           self.setId=(dataArray[1])
           
         when '102'
-          @chatServer.joinChannel(@id,dataArray[1])
+          @chatServer.joinChannel(@uuid,dataArray[1])
           
         when '110'          # => 110 => Set user inactive
           @isActive = false
@@ -106,11 +108,11 @@ end
          case dataArray[0]
         # Send message to user
         when '200'
-          @chatServer.sendToUser(@id, dataArray[1], dataArray[2])
+          @chatServer.sendToUser(@uuid, dataArray[1], dataArray[2])
           
           # Send message to channel
         when '201'
-          @chatServer.sendToChannel(@id, dataArray[1], dataArray[2])
+          @chatServer.sendToChannel(@uuid, dataArray[1], dataArray[2])
           
           # Join a channel
         when '202'
@@ -212,17 +214,25 @@ end
   # Get the user uuid
   #
   def getId
+    return @uuid
+  end
+  #
+  # Get the user uuid
+  #
+  def getI
     return @id
   end
   #
   #
   #
   def setId=(value)
-    unless @mysqlHelper.isInDB(MysqlHelper::CLIENT_DB_USER, "uuid", value)
+    id = @mysqlHelper.isInDB(MysqlHelper::CLIENT_DB_USER, "uuid", value)
+    unless id
       then
       self.send(NOK_BAD_LOGGING)
     else
-      @id = value
+      @uuid = value
+      @id = id
       @logged =true
       self.send(OK_LOGGEG)
     end

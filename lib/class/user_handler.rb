@@ -7,4 +7,6 @@ class UserHandler
   def initialize(uuid)
     @uuid = uuid
   end
+  
+  
 end

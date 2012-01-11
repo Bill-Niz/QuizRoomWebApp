@@ -9,6 +9,7 @@ class Channel
     @name = name
     @id = id
     @userList.addContentChangedListener(self)
+    @mysqlHelper = MysqlHelper.new(MysqlHelper::DB_ADRESS,"root","root",MysqlHelper::DB_NAME)
   end
   
   
@@ -35,6 +36,8 @@ class Channel
   # Add user in the channel
   #
   def join(user)
+    
+    @mysqlHelper.insertConUser(user.getI,@id)
     @userList.getcontents.each { |users| 
       
       users.userChangeFromChannel("204", @id, user.getId)
@@ -46,9 +49,9 @@ class Channel
   # Remove user from the channel
   #
   def remove(user)
+    @mysqlHelper.deleteDisConUser(user.getI, @id)
     @userList.remove(user)
-    @userList.getcontents.each { |users| 
-      
+    @userList.getcontents.each { |users|
       users.userChangeFromChannel("205", @id, user.getId)
     }
   end

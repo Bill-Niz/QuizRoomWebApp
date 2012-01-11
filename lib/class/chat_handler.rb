@@ -15,8 +15,8 @@ class ChatHandler
   #   "id"=>"456422", 
   #   "connected"=>"1", 
   #   "user_list"=>[{"uuid"=>"123456", 
-  #                 "lastname"=>"Doe", 
-  #                 "name"=>"Jhon", 
+  #                 "last_name"=>"Doe", 
+  #                 "first_name"=>"Jhon", 
   #                 "img_url"=>"http://pic.com/pic.png"}]
   # },...]
   #

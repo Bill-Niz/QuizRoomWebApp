@@ -41,7 +41,7 @@ class WebAppServer < Sinatra::Base
   #
   before do
     @start= Time.now
-    if(!request.path.include?'submit')
+    if(request.path.include?'api')
       if(params["uuid"] == nil || !@mysqlHelper.isInDB(MysqlHelper::USER_TABLE, "uuid", params["uuid"]))
         halt '{"error":"Unknow user",
           "message":"Unknow uuid !"}'
@@ -57,7 +57,6 @@ class WebAppServer < Sinatra::Base
     elps = ((@end-@start)*10000.0).to_int
     puts "Request from #{request.ip} in #{elps}mns. Size : #{response.body}"
   end
-  
   
   
    post '/submit/:method' do
@@ -76,34 +75,23 @@ class WebAppServer < Sinatra::Base
          s.proceedSubmit
         
       else
+        
         '{"error":"Unknow method",
           "message":"Unknow method; Should be "facebook" or "normal""}'
         
       end
      
       
-   end
+  end
     
-   
   
-  
-  get '/channel' do
+  get '/api/channel' do
        
     chatHandler = ChatHandler.new
     JSON chatHandler.getChannelList
-     
-       
-       
-      
-       
+           
     end
-  
-    
-  
-  
-  
-  
-  
+   
   
   
     get '/favicon.ico' do
@@ -129,7 +117,7 @@ end
   
   
   get '/*'  do
-    puts request.path.include?'submit'
+    
     "Unknow path!!"
   end
   

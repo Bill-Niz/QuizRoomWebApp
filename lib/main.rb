@@ -14,32 +14,14 @@ load "class/chat_handler.rb"
 
 
 
-w = WebAppServer.new(port=4444)
+#w = WebAppServer.new(port=4444)
 
 
-#port = 4444
-#srv = ChatServer.new(port)
 
-user = Hash["uuid"=>"123456",
-            "lastname"=>"Doe",
-            "name"=>"Jhon",
-            "img_url"=>"http://pic.com/pic.png"
-]
-userList = []
-userList << user
-#userList <<  user
 
-channel = Hash["name"=>"Jeux",
-               "id"=>"456422",
-               "connected"=>"1",
-               "user_list"=>userList
-]
-
-channelList = []
-channelList << channel
-channelList << channel
-
-#puts channelList
+m = MysqlHelper.new(MysqlHelper::DB_ADRESS,"root","root",MysqlHelper::DB_NAME)
+#m.deleteDisConUseré(4, 3)
+m.insertConUser(5, 2)
 
 u = Hash["email" => "userFB@mail.com",
                      "password" => "sha512",

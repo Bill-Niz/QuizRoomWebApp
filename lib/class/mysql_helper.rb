@@ -73,18 +73,20 @@ class MysqlHelper
     begin
     
     query = "SELECT * FROM `#{table}` WHERE `#{column}` = ?"
-    isIn = true
+     
     self.connect unless self.connected?  # => connect to the DB server if not connected
     
     sth = @dbh.prepare(query)
     
     sth.execute(dataToCheck)
     count=0
-     sth.fetch { |row|  
+    isIn=false
+     sth.fetch() { |row|  
        
        count+=1
+       isIn=row[0]
      } 
-      isIn = false if count==0
+      #isIn = false if count==0
       
     
     sth.finish
@@ -119,7 +121,7 @@ class MysqlHelper
   def insertUser(email,password,lastname,firstname,birthdate,uuid,fbid,access_token,access_token_expiration)
     begin
     success= false
-    query = "INSERT INTO `QuizRoom`.`user` (`email`, `password`, `last_name`, 
+    query = "INSERT INTO `#{DB_NAME}`.`#{USER_TABLE}` (`email`, `password`, `last_name`, 
                                             `first_name`, `birthdate`, `uuid`,
                                             `facebook_id`, `access_token`, 
                                             `access_token_expiration`) 
@@ -205,8 +207,8 @@ class MysqlHelper
     
      sth.fetch { |row|  
        userlList << Hash["uuid" => row[0],
-                          "lastname" =>  to_utf8(row[1]),
-                          "name" =>  to_utf8(row[2]),
+                          "last_name" =>  to_utf8(row[1]),
+                          "first_name" =>  to_utf8(row[2]),
                           "img_url" =>  row[3]
                           ]
      } 
@@ -229,5 +231,68 @@ class MysqlHelper
     end
     return userlList
   end
+  #
+  # Insert Connected user in to channel
+  #
+  def insertConUser(idUser,idChannel)
+    
+    begin
+      query = "INSERT INTO `#{DB_NAME}`.`#{USER_LIST_IN_CHAN_TABBLE}` (`user_id_user`, `channel_id_channel`) 
+                                                                       VALUES (?, ?)"
+    
+    self.connect unless self.connected?  # => connect to the DB server if not connected
+    
+    sth = @dbh.prepare(query)
+
+    sth.execute(idUser,idChannel)
+    sth.finish
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+    end
+  end
+  #
+  # delete disconnected user in to channel
+  #
+  def deleteDisConUser(idUser,idChannel)
+    
+    begin
+      query = "DELETE FROM `#{DB_NAME}`.`#{USER_LIST_IN_CHAN_TABBLE}` WHERE `#{USER_LIST_IN_CHAN_TABBLE}`.`user_id_user` = ? AND `#{USER_LIST_IN_CHAN_TABBLE}`.`channel_id_channel` = ?"
+      queryReset = "ALTER TABLE #{USER_LIST_IN_CHAN_TABBLE} AUTO_INCREMENT = 1"
+      self.connect unless self.connected?  # => connect to the DB server if not connected
+      sth = @dbh.prepare(query)
+      sth.execute(idUser,idChannel)
+      sth = @dbh.prepare(queryReset)
+      sth.execute
+      
+    sth.finish
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+    end
+    
+      
+  end
+  
+  
+  
   
 end

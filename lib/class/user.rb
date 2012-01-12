@@ -87,7 +87,7 @@ end
           self.setId=(dataArray[1])
           
         when '102'
-          @chatServer.joinChannel(@uuid,dataArray[1])
+          @chatServer.joinChannel(@id,dataArray[1])
           
         when '110'          # => 110 => Set user inactive
           @isActive = false
@@ -108,11 +108,11 @@ end
          case dataArray[0]
         # Send message to user
         when '200'
-          @chatServer.sendToUser(@uuid, dataArray[1], dataArray[2])
+          @chatServer.sendToUser(@id, dataArray[1], dataArray[2])
           
           # Send message to channel
         when '201'
-          @chatServer.sendToChannel(@uuid, dataArray[1], dataArray[2])
+          @chatServer.sendToChannel(@id, dataArray[1], dataArray[2])
           
           # Join a channel
         when '202'

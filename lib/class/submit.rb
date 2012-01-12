@@ -26,8 +26,8 @@ class Submit
   #             "birthdate" => "10/10/1989",
   #             "uuid" => "UUID",
   #             "facebook_id" => "fb_id"
-  #             "access_token" => "token",
-  #             "access_token_expiration" => "token_expiration"
+  #             "fb_access_token" => "token",
+  #             "fb_access_token_expiration" => "token_expiration"
   #             }
   #
   ##
@@ -63,8 +63,8 @@ class Submit
                               @userData['birthdate'], 
                               @userData['uuid'],
                               @userData['facebook_id'], 
-                              @userData['access_token'], 
-                              @userData['access_token_expiration'])
+                              @userData['fb_access_token'], 
+                              @userData['fb_access_token_expiration'])
                             then
                             ERROR_USER_NOT_REGISTERED
           else
@@ -106,7 +106,6 @@ class Submit
   # Check if the user is already in the DataBase
   ##
   def checkUser
-    
     @mysqlHelper.isInDB(MysqlHelper::USER_TABLE, "email", @userData['email'])
   end
   

@@ -150,6 +150,13 @@ class MysqlHelper
     return success
     
   end
+  
+  
+  #######################################################
+  #                                                     #
+  #                   CHAT HANDLING                     #
+  #                                                     # 
+  #######################################################
   #
   # Return the channels list
   #
@@ -194,7 +201,7 @@ class MysqlHelper
   def getUserListInchannel(idChan)
     begin
     userlList = []
-    query = "SELECT uuid,last_name,first_name,profile_img FROM `#{USER_TABLE}` 
+    query = "SELECT id_user,last_name,first_name,profile_img FROM `#{USER_TABLE}` 
              INNER JOIN #{USER_LIST_IN_CHAN_TABBLE} 
                   ON #{USER_TABLE}.id_user = #{USER_LIST_IN_CHAN_TABBLE}.user_id_user 
                   WHERE #{USER_LIST_IN_CHAN_TABBLE}.channel_id_channel  = #{idChan}"
@@ -206,7 +213,7 @@ class MysqlHelper
     sth.execute()
     
      sth.fetch { |row|  
-       userlList << Hash["uuid" => row[0],
+       userlList << Hash["id" => row[0],
                           "last_name" =>  to_utf8(row[1]),
                           "first_name" =>  to_utf8(row[2]),
                           "img_url" =>  row[3]
@@ -231,6 +238,7 @@ class MysqlHelper
     end
     return userlList
   end
+  
   #
   # Insert Connected user in to channel
   #
@@ -292,7 +300,82 @@ class MysqlHelper
       
   end
   
+  #####################################################
+  #                                                   #
+  #                   USER HANDLE                     #
+  #                                                   # 
+  #####################################################
   
-  
+  #
+  # Update user info with column name / data
+  #
+  def updateUserInfo(uuid,colname,info)
+    
+    begin
+      query = "UPDATE  `#{DB_NAME}`.`#{USER_TABLE}` SET  `#{colname}`  =  ? WHERE  `user`.`uuid` = ?;"
+      self.connect unless self.connected?  # => connect to the DB server if not connected
+      sth = @dbh.prepare(query)
+      sth.execute(info,uuid)
+     
+      
+    sth.finish
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+    end
+    
+      
+  end
+  #
+  #
+  # Try to login an user with login and password
+  # 
+  # Return : UUID of the user Or FALSE
+  #
+  #
+  def loginNormal(userInfo)
+    
+    begin
+    
+    query = "SELECT uuid FROM `#{USER_TABLE}` WHERE `email` = ? AND `password` = ?"
+     
+    self.connect unless self.connected?  # => connect to the DB server if not connected
+    
+    sth = @dbh.prepare(query)
+    
+    sth.execute(userInfo["email"],useInfo["password"])
+    count=0
+    isIn=false
+    sth.fetch() { |row|  
+       isIn=row[0]
+     } 
+     
+    sth.finish
+    
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+    end
+    return isIn
+      
+  end
   
 end

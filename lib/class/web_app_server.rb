@@ -59,33 +59,60 @@ class WebAppServer < Sinatra::Base
   end
   
   
+  #
+  # Submit Section submit
+  #
    post '/submit/:method' do
       request.body.rewind
       data = JSON.parse request.body.read
       
       case params[:method]
-      when 'facebook'
-        #TODO Check DATA validity!
-        s = Submit.new(data, 'facebook')
-        s.proceedSubmit
-       
-      when 'normal'
-        #TODO Check DATA validity!
-         s = Submit.new(data, 'normal')
-         s.proceedSubmit
-        
-      else
-        
-        '{"error":"Unknow method",
-          "message":"Unknow method; Should be "facebook" or "normal""}'
-        
-      end
+        when 'facebook'
+          #TODO Check DATA validity!
+          s = Submit.new(data, 'facebook')
+          s.proceedSubmit
+
+        when 'normal'
+          #TODO Check DATA validity!
+           s = Submit.new(data, 'normal')
+           s.proceedSubmit
+
+        else
+
+          '{"error":"Unknow method",
+            "message":"Unknow method; Should be "facebook" or "normal""}'
+
+        end
      
       
-  end
-    
+    end
+    #
+    # Login section
+    #
+    get "/login/:method" do
+      request.body.rewind
+      data = JSON.parse request.body.read
+      
+      case params[:method]
+        when 'facebook'
+          #TODO Check DATA validity!
+          s = Submit.new(data, 'facebook')
+          s.proceedSubmit
+
+        when 'normal'
+          #TODO Check DATA validity!
+           s = Submit.new(data, 'normal')
+           s.proceedSubmit
+
+        else
+
+          '{"error":"Unknow method",
+            "message":"Unknow method; Should be "facebook" or "normal""}'
+
+        end
+    end
   
-  get '/api/channel' do
+    get '/api/channel' do
        
     chatHandler = ChatHandler.new
     JSON chatHandler.getChannelList
@@ -99,18 +126,18 @@ class WebAppServer < Sinatra::Base
     end
     
     
-   not_found do
-    'Pas moyen de trouver ce que vous cherchez'
-  end
+    not_found do
+      'Pas moyen de trouver ce que vous cherchez'
+    end
   
-   error do
-    'mais une '
-  end
+    error do
+      'mais une '
+    end
   
   get '/telecharger/*.*' do
-  # répond à /telecharger/chemin/vers/fichier.xml
-  params[:splat] # => ["chemin/vers/fichier", "xml"]
-end
+    # répond à /telecharger/chemin/vers/fichier.xml
+    params[:splat] # => ["chemin/vers/fichier", "xml"]
+  end
   
   
   

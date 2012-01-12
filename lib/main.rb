@@ -10,18 +10,19 @@ load "class/user_repository.rb"
 load "class/user.rb"
 load "class/chat_server.rb"
 load "class/chat_handler.rb"
+load "class/utility.rb"
 
 
 
 
 #w = WebAppServer.new(port=4444)
 
-
-
-
-m = MysqlHelper.new(MysqlHelper::DB_ADRESS,"root","root",MysqlHelper::DB_NAME)
-#m.deleteDisConUseré(4, 3)
-m.insertConUser(5, 1)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    
+t = "BAAE0N0Wh3YYBA EZCtxL4iC00XmELxczl7hfGX7GbdGawICcDQW9ekIwSp762uvp4Tt8Ttz2xDIEcD4550r4Ese96iIVvgwrpMZBZANOVdNBfMohRRriWvVdVSQpjjGm9UzFbaqHZAgZDZD"
+a = "BAAE0N0Wh3YYBA EZCtxL4iC00XmELxczl7hfGX7GbdGawICcDQW9ekIwSp762uvp4Tt8Ttz2xDIEcD4550r4Ese96iIVvgwrpMZBZANOVdNBfMohRRriWvVdVSQpjjGm9UzFbaqHZAgZDZD"    
+c = "BAAE0N0Wh3YYBA CJIWgAcGq59tG3SwgCn7Q6DTCovhUV4XuZCd7eS7mIsepDCm5sZA1rYcgRf5iybyq063jzxBlegTCRHXH7BvGvL4TbSEhDZBsgNsr8QphzXYYxImymtwN5hqBeBOWC7ArNW6ZCG"
+puts rand(36**64).to_s(36)
 
 u = Hash["email" => "userFB@mail.com",
                      "password" => "sha512",
@@ -34,12 +35,8 @@ u = Hash["email" => "userFB@mail.com",
                      "access_token_expiration" => "2011-12-23 23:23:29"]
   #puts userData['email'] 
   
-c= ChatHandler.new
+#c= ChatHandler.new
 
-puts JSON c.getChannelList
+#puts JSON c.getChannelList
 
 
-#o =  [('a'..'z'),('A'..'Z'),(0..9)].map{|i| i.to_a}.flatten 
-#map =  (0..8).map{o[rand(o.length)]}.join;
-#
-#puts map

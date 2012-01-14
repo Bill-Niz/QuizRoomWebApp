@@ -378,4 +378,86 @@ class MysqlHelper
       
   end
   
+  
+  
+  ##
+  #
+  #
+  #
+  ##
+  def loginFacebook(userInfo)
+    
+    begin
+    
+    query = "SELECT uuid FROM `#{USER_TABLE}` WHERE `faceboo_id` = ?"
+     
+    self.connect unless self.connected?  # => connect to the DB server if not connected
+    
+    sth = @dbh.prepare(query)
+    
+    sth.execute(userInfo["faceboo_id"])
+    count=0
+    isIn=false
+    sth.fetch() { |row|  
+       isIn=row[0]
+     } 
+     
+    sth.finish
+    
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+    end
+    return isIn
+      
+  end
+  #
+  # Check the validity of uuid with access token
+  #
+  #
+  def validAccessToken(accessInfo)
+    
+    begin
+    
+    query = "SELECT uuid FROM `#{USER_TABLE}` WHERE `uuid` = ? AND `access_token` = ? AND `access_token_expiration` > NOW()"
+     
+    self.connect unless self.connected?  # => connect to the DB server if not connected
+    
+    sth = @dbh.prepare(query)
+    
+    sth.execute(accessInfo["uuid"],accessInfo["token"])
+    count=0
+    isIn=false
+    sth.fetch() { |row|  
+       isIn=row[0]
+     } 
+     
+    sth.finish
+    
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+    end
+    return isIn
+      
+  end
+  
 end

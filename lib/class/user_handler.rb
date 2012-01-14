@@ -1,13 +1,17 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
 $:.unshift File.join(File.dirname(__FILE__),'..','class')
-load "mysql_helper.rb"
+#load "mysql_helper.rb"
+require 'uri'
+require 'net/http'
+require 'json'
 
 class UserHandler
   
   ERROR_UNKNOWN_METHOD = '{"error":"Unknown method"}'
   ERROR_USER_NOT_LOGIN = '{"error":"Unkow user or passeword"}'
   ERROR_USER_EXIST = '{"error":"user already exist"}'
+  LINK_FACEBOOK_GRAPH = 'https://graph.facebook.com/?fields=id&access_token='
   
   def initialize()
     @uuid 
@@ -70,16 +74,16 @@ class UserHandler
   #
   # userInfo : Normal :
   #
-  #{"email" : "user@mail.com",
-  #  "password" : "sha512",
+  #{"email" => "user@mail.com",
+  #  "password" => "sha512",
   #}
   #
   #Facebook :
   #
   #  {
-  #     "facebook_id" : "fb_id",
-  #     "fb_access_token" : "token",
-  #     "fb_access_token_expiration" :"token_expiration"
+  #     "facebook_id" => "fb_id",
+  #     "fb_access_token" => "token",
+  #     "fb_access_token_expiration" => "token_expiration"
   # }
   # 
   # 
@@ -94,8 +98,17 @@ class UserHandler
   def login(method,userInfo)
     
     case method
+      
       when 'facebook'
-        @mysqlHelper
+        uuid = @mysqlHelper.loginFacebook(userInfo)
+        if uuid
+          @uuid = uuid
+          token = self.genToken
+          token
+        else
+          
+        end
+        ERROR_USER_NOT_LOGIN
         
       when 'normal'
         uuid = @mysqlHelper.loginNormal(userInfo)
@@ -107,9 +120,56 @@ class UserHandler
           
         end
         ERROR_USER_NOT_LOGIN
+        
       else
         ERROR_UNKNOWN_METHOD 
       end
+  end
+  
+  #
+  #Check if the access token given is valid for
+  # the user id given
+  # 
+  # if valid, facebook graph send : 
+  # 
+  # {
+  # 
+  #   "id": "100000096947433"
+  # }
+  # 
+  # If not : 
+  # 
+  # {
+  #   "error": {
+  #      "message": " A message ",
+  #      "type": "OAuthException"
+  #   }
+  # }
+  # 
+  # 
+  # 
+  #
+  def checkFbToken(idUser,fbToken)
+    url ="https://graph.facebook.com/#{idUser}?fields=id&access_token=#{fbToken}"
+    uri = URI.parse( url )
+     begin
+      http = Net::HTTP.new(uri.host, 443)
+      http.use_ssl = true
+      #http.enable_post_connection_check = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      store = OpenSSL::X509::Store.new
+      store.set_default_paths
+      http.cert_store = store
+      http.start {
+        response = http.get(uri.path)
+        puts  response.body if !response.nil?
+      }
+     rescue => e
+       puts e.to_s
+   
+     end
+     
+    
   end
   
 end

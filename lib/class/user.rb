@@ -62,10 +62,12 @@ end
     while self.connected?
       line = @socket.gets unless @socket.closed?
       if(line == nil)
+        @connected = false
+        @chatServer.disconnectUser(self)
         @socket.close
+      else
+        self.processIncomingData(line)
       end
-      self.processIncomingData(line)
-     
     end
     puts "Connection Closed!"
   end
@@ -83,11 +85,9 @@ end
       when '1'                # => User Manager
         
         case dataArray[0]
+          
         when '101'          # => 101 => Set id
           self.setId=(dataArray[1])
-          
-        when '102'
-          @chatServer.joinChannel(@id,dataArray[1])
           
         when '110'          # => 110 => Set user inactive
           @isActive = false

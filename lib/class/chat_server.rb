@@ -101,6 +101,21 @@ class ChatServer
     getChannelById(toIdChannel).send(fromIdUser, msg)
   end
   #
+  # Disconnect user from the server:
+  # Remove from all channel
+  # Remove from User list
+  #
+  #
+  def disconnectUser(user)
+    @userList.remove(user)
+     @channelList.getcontents.each { |chan| 
+    
+      if(chan.isIn(user))
+        chan.remove(user)
+      end
+    } 
+  end
+  #
   #
   #
   def getChannelById(id)

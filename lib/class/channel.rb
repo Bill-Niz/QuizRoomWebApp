@@ -36,7 +36,6 @@ class Channel
   # Add user in the channel
   #
   def join(user)
-    
     @mysqlHelper.insertConUser(user.getI,@id)
     @userList.getcontents.each { |users| 
       
@@ -49,11 +48,13 @@ class Channel
   # Remove user from the channel
   #
   def remove(user)
-    @mysqlHelper.deleteDisConUser(user.getI, @id)
-    @userList.remove(user)
-    @userList.getcontents.each { |users|
-      users.userChangeFromChannel("205", @id, user.getId)
-    }
+    if(self.isIn(user))
+      @mysqlHelper.deleteDisConUser(user.getI, @id)
+      @userList.remove(user)
+      @userList.getcontents.each { |users|
+        users.userChangeFromChannel("205", @id, user.getId)
+      }
+    end
   end
   #
   # Send message to all users in this channel
@@ -65,6 +66,22 @@ class Channel
       user.receiveFromChannel(@id, fromIdUser, msg)
       
     }
+  end
+  #
+  # Check if an user is in the channel
+  #
+  def isIn(user)
+    
+    isIn = false
+    @userList.getcontents.each { |users| 
+    
+      if(user == users)
+        isIn = true
+        break
+      end
+      
+    }
+    return isIn
   end
   #
   #

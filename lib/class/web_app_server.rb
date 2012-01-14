@@ -7,7 +7,7 @@ require 'webrick/https'
 require 'openssl'
 require 'json'
 require 'web_app_submit.rb'
-require 'class/chat_handler'
+require 'class/chat_handler.rb'
 
 
 
@@ -36,20 +36,18 @@ class WebAppServer < Sinatra::Base
   
   use WebAppSubmit
    
+  #################################################
   #
-  # Logging section
+  # Logging  and Access control section
+  # 
   #
+  
   before do
     @start= Time.now
     if(request.path.include?'api')
-      if(params["uuid"] == nil || !@mysqlHelper.isInDB(MysqlHelper::USER_TABLE, "uuid", params["uuid"]))
-        halt '{"error":"Unknow user",
-          "message":"Unknow uuid !"}'
+      self.validAccess
       end
-      
-    end
         
-       
   end
   
   after do
@@ -59,8 +57,10 @@ class WebAppServer < Sinatra::Base
   end
   
   
+  ###############################################
   #
   # Submit Section submit
+  # 
   #
    post '/submit/:method' do
       request.body.rewind
@@ -86,8 +86,11 @@ class WebAppServer < Sinatra::Base
      
       
     end
+    
+    ############################################
     #
-    # Login section
+    # LOGIN SECTION
+    # 
     #
     get "/login/:method" do
       request.body.rewind
@@ -96,13 +99,13 @@ class WebAppServer < Sinatra::Base
       case params[:method]
         when 'facebook'
           #TODO Check DATA validity!
-          s = Submit.new(data, 'facebook')
-          s.proceedSubmit
+          login = UserHandler.new
+          login.login('facebook', data)
 
         when 'normal'
           #TODO Check DATA validity!
-           s = Submit.new(data, 'normal')
-           s.proceedSubmit
+           login = UserHandler.new
+          login.login('normal', data)
 
         else
 
@@ -112,46 +115,91 @@ class WebAppServer < Sinatra::Base
         end
     end
   
+    ###########################################
+    #
+    # API SECTION
+    # 
+    #
+  
     get '/api/channel' do
        
     chatHandler = ChatHandler.new
     JSON chatHandler.getChannelList
            
     end
-   
+    
   
-  
+    ###########################################
+    #
+    # DOWNLOAD SECTION
+    # 
+    #
+    
+    get '/telecharger/*.*' do
+      # répond à /telecharger/chemin/vers/fichier.xml
+      params[:splat] # => ["chemin/vers/fichier", "xml"]
+    end
+    
+    #
+    #
+    #
     get '/favicon.ico' do
       send_file "favicon.ico"
     end
-    
-    
+   
+  
+  
+    ###########################################
+    #
+    # UTILITY FUNCTIONS SECTION
+    # 
+    #
+  
+    def validAccess
+      
+      #Check
+      if(params["uuid"] == nil || ! @mysqlHelper.isInDB(MysqlHelper::USER_TABLE, "uuid", params["uuid"]))
+        halt '{"error":"Unknow user",
+          "message":"Unknow uuid !"}'
+      else
+        isValid = @mysqlHelper.validAccessToken(params)
+        if(!isValid)
+          halt '{"error":"Access token not valid",
+          "message":"Access token not valid or expired"}'
+        end
+      end
+      
+    end
+  
+    #########################################
+    #
+    # ERROR SECTION
+    # 
+    #
+  
     not_found do
-      'Pas moyen de trouver ce que vous cherchez'
+      '{"error" : " Unknow Path!"}'
     end
   
     error do
-      'mais une '
+      '{"error" : "Something goes wrong :("}'
     end
-  
-  get '/telecharger/*.*' do
-    # répond à /telecharger/chemin/vers/fichier.xml
-    params[:splat] # => ["chemin/vers/fichier", "xml"]
-  end
-  
-  
-  
-  
-  
-  get '/*'  do
+
+    #
+    #
+    #
+    get '/*'  do
+
+      '{"error" : " Unknow Path!"}'
+    end
     
-    "Unknow path!!"
+    #
+    #
+    #
+    post '/*'  do
+       '{"error" : " Unknow Path!"}'
+    end
+
+
+
   end
-  
-  post '/*'  do
-    "Unknow path!!"
-  end
-  
-  
-  
-end

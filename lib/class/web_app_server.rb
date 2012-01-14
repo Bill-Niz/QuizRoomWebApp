@@ -8,6 +8,7 @@ require 'openssl'
 require 'json'
 require 'web_app_submit.rb'
 require 'class/chat_handler.rb'
+require 'class/utility.rb'
 
 
 
@@ -62,6 +63,7 @@ class WebAppServer < Sinatra::Base
   # Submit Section submit
   # 
   #
+  
    post '/submit/:method' do
       request.body.rewind
       data = JSON.parse request.body.read
@@ -92,6 +94,7 @@ class WebAppServer < Sinatra::Base
     # LOGIN SECTION
     # 
     #
+    
     get "/login/:method" do
       request.body.rewind
       data = JSON.parse request.body.read
@@ -120,7 +123,11 @@ class WebAppServer < Sinatra::Base
     # API SECTION
     # 
     #
-  
+    
+   
+    #
+    #
+    #
     get '/api/channel' do
        
     chatHandler = ChatHandler.new
@@ -128,7 +135,35 @@ class WebAppServer < Sinatra::Base
            
     end
     
-  
+    #
+    #Get user info with user id
+    #{
+    #   « last_name » : « lastname »,
+    #   « first_name » :« first_name »,
+    #   « email » : « mail@me.com »,
+    #   « birthdate » :2012-01-10,
+    #   « facebook_id » : « fbk_id »,
+    #   « profile_img » :  « profile_img »
+    # }
+    #
+    get '/api/user' do
+      
+    if(params['user'] !=nil && Utility::is_a_number?(params['user']))
+        userInfo = @mysqlHelper.getUserInfo(params['user'])
+        if(userInfo)
+          userInfo
+        else
+          '{"error":"Unknow user",
+          "message":"Unknow id !"}'
+        end
+    else
+      '{"error":"Unknow user",
+          "message":"Unknow id !"}'
+        
+      end
+      
+    end
+    
     ###########################################
     #
     # DOWNLOAD SECTION
@@ -178,11 +213,11 @@ class WebAppServer < Sinatra::Base
     #
   
     not_found do
-      '{"error" : " Unknow Path!"}'
+      '{"error":" Unknow Path!"}'
     end
   
     error do
-      '{"error" : "Something goes wrong :("}'
+      '{"error":"Something goes wrong :("}'
     end
 
     #
@@ -199,7 +234,5 @@ class WebAppServer < Sinatra::Base
     post '/*'  do
        '{"error" : " Unknow Path!"}'
     end
-
-
 
   end

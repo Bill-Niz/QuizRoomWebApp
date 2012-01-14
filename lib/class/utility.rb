@@ -14,4 +14,10 @@ class Utility
     map =  (0..lenght).map{o[rand(o.length)]}.join;
     return map
   end
+  #
+  # Check if number
+  #
+  def self.is_a_number?(s)
+  s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true 
+  end
 end

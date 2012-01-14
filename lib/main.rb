@@ -40,12 +40,19 @@ v =  Hash["email" => "userFB@mail.com",
                      "facebook_id" => 12345,
                      "access_token" => "token_",
                      "access_token_expiration" => "2011-12-23 23:23:29"]                  
-th =[]
-th << t
-th << u
-th << v
+mysql = MysqlHelper.new
 
-puts (!false) 
+#puts mysql.getUserInfo("-2")
+
+def is_a_number?(s)
+  s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true 
+end
+puts is_a_number?(5)
+puts is_a_number?("+256.375")
+puts is_a_number?("-37.3")
+puts is_a_number?("x")
+puts is_a_number?(-37.3)
+puts is_a_number?("2.3.3")
 
 #t.checkFbToken(100000096947433, "BAAESltcZAKeYBAP4axCBJlWPr69Md1s9wxJBHPVjjA85ZCcWx5bIhHje7nu7ZBKYIVtdCZCibp7Jr48Mgmh0M4S7ZAjD2VZCoulZCZBZCAgHCRE2KijarawA1CrZC1K7DlKjdo5n6VIjgr7gZDZD")
 

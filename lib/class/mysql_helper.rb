@@ -335,6 +335,59 @@ class MysqlHelper
     
       
   end
+  
+  
+  
+  
+  #
+  #
+  # Try to login an user with login and password
+  # 
+  # Return : UUID of the user Or FALSE
+  #
+  #
+  def getUserInfo(idUser)
+    
+    begin
+    
+    query = "SELECT last_name,first_name,email,birthdate,facebook_id,profile_img FROM `#{USER_TABLE}` WHERE `id_user` = ?"
+     
+    self.connect unless self.connected?  # => connect to the DB server if not connected
+    
+    sth = @dbh.prepare(query)
+    
+    sth.execute(idUser)
+    count=0
+    userinf=false
+    sth.fetch() { |row|  
+      userinf = Hash["last_name" => self.to_utf8(row[0]),
+                      "first_name" => self.to_utf8(row[1]),
+                      "email" => row[2],
+                      "birthdate" => row[3],
+                      "facebook_id" => row[4],
+                      "profile_img" => row[5]]
+     } 
+     
+    sth.finish
+    
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+    end
+    return userinf
+      
+  end
+  
+  
   #
   #
   # Try to login an user with login and password

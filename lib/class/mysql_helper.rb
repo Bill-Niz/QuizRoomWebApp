@@ -13,7 +13,7 @@ class MysqlHelper
   CHANNEL_TABLE = "channel"
   CATEGORIES_TABLE= "categories"
   LIST_USER_CHANNEL_TABLE = "listUserChannel"
-  SERVER_LOG_TABLE = "serverLog"
+  LOG_TABLE = "serverLog"
   CLIENT_DB_USER = "QRClient"
   CLIENT_DB_PASSWORD = "USVtPeTbMsxEcMmn"
   DB_ADRESS = "localhost"
@@ -511,6 +511,41 @@ class MysqlHelper
     end
     return isIn
       
+  end
+  
+  #####################################################
+  #                                                   #
+  #                   LOG HANDLER                     #
+  #                                                   # 
+  #####################################################
+  
+  #
+  #
+  #
+  def log(uuid,ipsource,responseTime,responseSize)
+    begin
+      query = "INSERT INTO `#{DB_NAME}`.`#{LOG_TABLE}` (`user_uuid`, `ip_address`,`response_time`,`response_data_size`) 
+                                                                       VALUES (?, ?, ?, ?)"
+    
+    self.connect unless self.connected?  # => connect to the DB server if not connected
+    
+    sth = @dbh.prepare(query)
+
+    sth.execute(uuid,ipsource,responseTime,responseSize)
+    sth.finish
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+    end
   end
   
 end

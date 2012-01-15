@@ -104,7 +104,7 @@ class UserHandler
         if uuid
           @uuid = uuid
           token = self.genToken
-          token
+          JSON token
         else
           
         end
@@ -115,7 +115,7 @@ class UserHandler
         if uuid
           @uuid = uuid
           token = self.genToken
-          token
+          JSON token
         else
           
         end

@@ -53,7 +53,7 @@ class WebAppServer < Sinatra::Base
   
   after do
     @end = Time.now
-    elps = ((@end-@start)*10000.0).to_int
+    elps = ((@end-@start)*1000.0).to_int
     puts "Request from #{request.ip} in #{elps}mns. Size : #{response.body}"
   end
   

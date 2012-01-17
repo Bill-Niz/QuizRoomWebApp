@@ -17,10 +17,10 @@ load "class/log.rb"
 
 
 
-#w = WebAppServer.new(port=4444)
+w = WebAppServer.new(port=4444)
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-#q = ChatServer.new(4444)
+#q = ChatServer.new(5555)
 
 t = UserHandler.new
 Log::logHttpsRequest(0, "192.102.1.1", 30, 40)

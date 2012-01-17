@@ -1,6 +1,6 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
-
+require 'digest/sha2'
 class Utility
   def initialize
     
@@ -19,5 +19,12 @@ class Utility
   #
   def self.is_a_number?(s)
   s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true 
+  end
+  
+  #
+  # Generata SHA512 hash
+  #
+  def self.sha512(data)
+    return Digest::SHA512.hexdigest(data)
   end
 end

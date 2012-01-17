@@ -9,6 +9,7 @@ require 'json'
 require 'web_app_submit.rb'
 require 'class/chat_handler.rb'
 require 'class/utility.rb'
+require 'class/log.rb'
 
 
 
@@ -55,6 +56,8 @@ class WebAppServer < Sinatra::Base
     @end = Time.now
     elps = ((@end-@start)*1000.0).to_int
     puts "Request from #{request.ip} in #{elps}mns. Size : #{response.body}"
+    Log::logHttpsRequest(params["uuid"], request.ip, elps, response.body.length)
+    
   end
   
   
@@ -95,7 +98,7 @@ class WebAppServer < Sinatra::Base
     # 
     #
     
-    get "/login/:method" do
+    post "/login/:method" do
       request.body.rewind
       data = JSON.parse request.body.read
       
@@ -137,6 +140,8 @@ class WebAppServer < Sinatra::Base
     
     #
     #Get user info with user id
+    #
+    #return
     #{
     #   « last_name » : « lastname »,
     #   « first_name » :« first_name »,
@@ -164,6 +169,21 @@ class WebAppServer < Sinatra::Base
       
     end
     
+    #
+    # Update user info
+    # 
+    # {
+    #  « last_name » :  « last_name »,
+    #  « first_name » : « first_name »,
+    #  « birthdate » :2012-01-10,
+    #  « profile_img » :  « profile_img »
+    # }
+    # 
+    #
+    post '/api/update' do
+      
+    end
+    
     ###########################################
     #
     # DOWNLOAD SECTION
@@ -182,7 +202,29 @@ class WebAppServer < Sinatra::Base
       send_file "favicon.ico"
     end
    
-  
+    #############################################
+    #
+    #
+    # Recovery password section
+    #
+    #
+    
+    get '/recovery' do
+      if(params['token'])
+        
+        puts request.user_agent 
+        erb :index, :format => :html5 , :locals => {:token => params['token'], :agent => request.user_agent }
+      else
+        
+      end
+    end
+    
+    post '/recovery' do
+      if(params['token'])
+        password = Utility::sha512(params['psw'])
+        puts password
+      end
+    end
   
     ###########################################
     #
@@ -225,6 +267,7 @@ class WebAppServer < Sinatra::Base
     #
     get '/*'  do
 
+      erb :index, :format => :html5
       '{"error" : " Unknow Path!"}'
     end
     
@@ -236,3 +279,5 @@ class WebAppServer < Sinatra::Base
     end
 
   end
+  
+ 

@@ -524,7 +524,7 @@ class MysqlHelper
   #
   def log(uuid,ipsource,responseTime,responseSize)
     begin
-      query = "INSERT INTO `#{DB_NAME}`.`#{LOG_TABLE}` (`user_uuid`, `ip_address`,`response_time`,`response_data_size`) 
+      query = "INSERT INTO `#{DB_NAME}`.`#{LOG_TABLE}` (`uuid`, `ip_address`,`response_time`,`response_data_size`) 
                                                                        VALUES (?, ?, ?, ?)"
     
     self.connect unless self.connected?  # => connect to the DB server if not connected

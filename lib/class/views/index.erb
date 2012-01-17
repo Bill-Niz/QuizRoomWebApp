@@ -1,0 +1,166 @@
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+<%
+  case agent
+  when /iPhone|iPod/
+    @width = 540
+  @height = 400
+  else
+    @width = 540
+  @height = 300
+  end
+  
+  
+%>
+
+<html>
+  <head>
+    <title><%= "QuizRoom : Mot de passe oublié" %></title>
+  </head>
+  <style TYPE="text/css">
+    body{
+      
+      
+      <%
+  case agent
+  when /iPhone|iPod/ %>
+      
+    width: auto;
+   margin: auto;
+   padding: auto;
+   margin-top : 220px;
+   font: 25px/15px sans-serif;
+		background: #fff;
+		
+		color: #000;
+		
+    
+  <%  else %>
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin-top: -<%= @height/2 %>px;
+      margin-left: -<%= @width/2 %>px;
+      text-align: center;
+      
+  <%  end %>
+       background-image: linear-gradient(bottom, rgb(15,30,29) 30%, rgb(41,57,56) 65%, rgb(70,86,84) 83%);
+    background-image: -o-linear-gradient(bottom, rgb(15,30,29) 30%, rgb(41,57,56) 65%, rgb(70,86,84) 83%);
+    background-image: -moz-linear-gradient(bottom, rgb(15,30,29) 30%, rgb(41,57,56) 65%, rgb(70,86,84) 83%);
+    background-image: -webkit-linear-gradient(bottom, rgb(15,30,29) 30%, rgb(41,57,56) 65%, rgb(70,86,84) 83%);
+    background-image: -ms-linear-gradient(bottom, rgb(15,30,29) 30%, rgb(41,57,56) 65%, rgb(70,86,84) 83%);
+
+    background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0.3, rgb(15,30,29)),
+            color-stop(0.65, rgb(41,57,56)),
+            color-stop(0.83, rgb(70,86,84))
+    );
+    
+   
+     
+                
+    }
+    #recoveryForm {
+      
+      margin-left: auto;
+      margin-right: auto;
+      width: <%= @width %>px;
+      height: <%= @height %>px;
+      text-align: left; 
+      
+    }
+    #center {
+      
+     
+    }
+    .round {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border: 1px solid  #207c7c;
+      color : #DDD;
+
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 4px #23adad;
+    background-color:#F8F8F8;
+    
+    background-image: linear-gradient(bottom, rgb(19,142,180) 24%, rgb(46,171,216) 62%);
+background-image: -o-linear-gradient(bottom, rgb(19,142,180) 24%, rgb(46,171,216) 62%);
+background-image: -moz-linear-gradient(bottom, rgb(19,142,180) 24%, rgb(46,171,216) 62%);
+background-image: -webkit-linear-gradient(bottom, rgb(19,142,180) 24%, rgb(46,171,216) 62%);
+background-image: -ms-linear-gradient(bottom, rgb(19,142,180) 24%, rgb(46,171,216) 62%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.24, rgb(19,142,180)),
+	color-stop(0.62, rgb(46,171,216))
+);
+
+}
+body:before {
+          content: "";
+          position: fixed;
+          top: -10px;
+          left: 0;
+          width: 100%;
+          height: 10px;
+
+          -webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+              -moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+                         box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+
+          z-index: 100;
+}
+
+
+
+
+  </style>
+  
+  
+  <script>
+    function validateForm()
+      {
+      var psw =document.forms["recovery"]["psw"].value;
+      var psw2 =document.forms["recovery"]["psw2"].value;
+      if (psw2 != psw || psw2 =="" || psw == "")
+        {
+        alert("Les deux mot de passe doivent non vide et être identique!");
+        return false;
+        }
+}
+  </script>
+  
+  
+  
+  <body >
+    <div id="main">
+      <div id="center">
+      <div id="recoveryForm">
+      <form class="round" method="post" name="recovery" action="<%= "/recovery?token=" +token %>" onsubmit="return validateForm()" >
+          
+        
+          <%="Nouveau mot de passe :"%><br/><br/>
+          <input type="password" name="psw" size="30"  required><br/><br/>
+          <%="Vérification :"%><br/><br/>
+          <input type="password" name="psw2" size="30" required><br/><br/>
+       
+          <input type="submit">
+        
+      </form>
+      </div>
+      </div>
+      </div>
+  </body>
+  
+</html>

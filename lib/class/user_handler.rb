@@ -9,8 +9,7 @@ require 'json'
 class UserHandler
   
   ERROR_UNKNOWN_METHOD = '{"error":"Unknown method"}'
-  ERROR_USER_NOT_LOGIN = '{"error":"Unkow user or passeword"}'
-  ERROR_USER_EXIST = '{"error":"user already exist"}'
+  ERROR_USER_NOT_LOGIN = '{"error":"Unkow user or password"}'
   LINK_FACEBOOK_GRAPH = 'https://graph.facebook.com/?fields=id&access_token='
   
   def initialize()
@@ -31,11 +30,7 @@ class UserHandler
   # [« last_name » =>  « last_name »,
   #« first_name » => « first_name »,
   #« birthdate » => 2012-01-10,
-  #« uuid » =>  « uuid »,
-  #« facebook_id » => « fbk_id »,
-  #« access_token » =>  « acces_t »,
-  #« acces_token_expiration » =>  « ate»,
-  #« profile_img » =>  « profile_img »
+  #« profile_img » =>  «profile_img»
   #]
   #
   #
@@ -46,6 +41,7 @@ class UserHandler
       
       @mysqlHelper.updateUserInfo(@uuid,key, value)
     }
+    
   end
   #
   # Generate access token with expiration data
@@ -60,10 +56,12 @@ class UserHandler
     token_expiration = Time.now
     token_expiration += @expiration_time * 60 * 60
     
-    Hash["uuid" => "#{@uuid}",
+    tokenInfo = Hash["uuid" => "#{@uuid}",
          "access_token" => "#{token}",
          "access_token_expiration" => token_expiration
         ]
+        self.udateInfo(tokenInfo)
+    return tokenInfo
     
     
   end

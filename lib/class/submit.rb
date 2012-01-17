@@ -34,7 +34,7 @@ class Submit
   
   ERROR_UNKNOWN_METHOD = '{"error":"Unknown method"}'
   SUCCESS_USER_REGISTERED = '{"succes":"ok"}'
-  ERROR_USER_NOT_REGISTERED = '{"error":"fail"}'
+  ERROR_USER_NOT_REGISTERED = '{"error":"fail : Something went wrong"}'
   ERROR_USER_EXIST = '{"error":"user already exist"}'
   
   def initialize (data ,method)

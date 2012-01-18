@@ -33,6 +33,34 @@ d08ad3dc-5b73-4a6f-a123-029d705c2b7c
 
 0
 
+crt
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+key
+file
+0
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
 server.crt
 file
 
@@ -100,4 +128,18 @@ has-props
 
 
 887
+
+srv.crt
+file
+0
+
+
+add
+
+srv.key
+file
+0
+
+
+add
 

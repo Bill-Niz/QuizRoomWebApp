@@ -7,8 +7,8 @@ class Log
   end
   
   
-  def self.logHttpsRequest(uuid,ipsource,responseTime,responseSize)
+  def self.logHttpsRequest(uuid,ipsource,request,responseTime,responseSize)
     mysql = MysqlHelper.new
-    mysql.log(uuid,ipsource,responseTime,responseSize)
+    mysql.log(uuid,ipsource,request,responseTime,responseSize)
   end
 end

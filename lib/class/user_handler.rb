@@ -34,12 +34,12 @@ class UserHandler
   #]
   #
   #
-  def udateInfo(hashInfo)
+  def udateInfo(uuid,hashInfo)
     #TODO : Check if keys are valid
     
     hashInfo.each(){|key,value|
       
-      @mysqlHelper.updateUserInfo(@uuid,key, value)
+      @mysqlHelper.updateUserInfo(uuid,key, value)
     }
     
   end
@@ -60,7 +60,7 @@ class UserHandler
          "access_token" => "#{token}",
          "access_token_expiration" => token_expiration
         ]
-        self.udateInfo(tokenInfo)
+        self.udateInfo(@uuid,tokenInfo)
     return tokenInfo
     
     

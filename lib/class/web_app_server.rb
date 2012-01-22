@@ -14,6 +14,7 @@ require 'class/log.rb'
 
 
 
+
 class WebAppServer < Sinatra::Base
   
   def initialize(port = 8443,cert_path = 'ssl/')
@@ -21,6 +22,7 @@ class WebAppServer < Sinatra::Base
     @port = port
     @CERT_PATH = cert_path
     @mysqlHelper = MysqlHelper.new
+    
     @webrick_options = {
         :Port               => @port,
         :Logger             => WEBrick::Log::new($stderr, WEBrick::Log::DEBUG),
@@ -56,7 +58,8 @@ class WebAppServer < Sinatra::Base
     @end = Time.now
     elps = ((@end-@start)*1000.0).to_int
     puts "Request from #{request.ip} in #{elps}mns. Size : #{response.body}"
-    Log::logHttpsRequest(params["uuid"], request.ip, elps, response.body.length)
+    
+    Log::logHttpsRequest(params["uuid"], request.ip,request.url, elps, response.body.length)
     
   end
   
@@ -129,7 +132,7 @@ class WebAppServer < Sinatra::Base
     
    
     #
-    #
+    # get Channel list
     #
     get '/api/channel' do
        
@@ -181,6 +184,11 @@ class WebAppServer < Sinatra::Base
     # 
     #
     post '/api/update' do
+      request.body.rewind
+      data = JSON.parse request.body.read
+      uhandler = UserHandler.new
+      uhandler.udateInfo(params['uuid'], data)
+      '{"succes":"ok"}'
       
     end
     
@@ -209,20 +217,54 @@ class WebAppServer < Sinatra::Base
     #
     #
     
-    get '/recovery' do
-      if(params['token'])
+    #
+    # {
+    #  « email » :  « email »
+    # }
+    #
+    post '/recovery/user' do
+      request.body.rewind
+      data = JSON.parse request.body.read
+      valid = @mysqlHelper.isInDB(MysqlHelper::USER_TABLE, 'email', data['email'])
+      #TODO : send mail
+      if valid
         
-        puts request.user_agent 
-        erb :index, :format => :html5 , :locals => {:token => params['token'], :agent => request.user_agent }
+        '{"success":"ok"}'
       else
-        
+        '{"error":"Recovery password fail"}'
       end
+      
+      
     end
     
+    #
+    #
+    #
+    get '/recovery' do
+      
+    if(params['token'])
+        valid =  @mysqlHelper.validRecoveryToken(params['token'])
+        erb :index, :format => :html5 , :locals => {:token => params['token'],:valid => valid,:success => false, :agent => request.user_agent }
+    else
+      erb :index, :format => :html5 , :locals => {:token => '',:valid => false, :success => false,:agent => request.user_agent }
+    end
+    end
+    
+    #
+    #
+    #
     post '/recovery' do
-      if(params['token'])
-        password = Utility::sha512(params['psw'])
-        puts password
+      if(params['token'] && params['psw'])
+        valid = @mysqlHelper.validRecoveryToken(params['token'])
+        if valid
+          password = Utility::sha512(params['psw'])
+          @mysqlHelper.updatePassword(valid, password)
+          @mysqlHelper.deleteRecoveryPasswordToken(params['token'])
+          erb :index, :format => :html5 , :locals => {:token => '',:valid => false,:success => true, :agent => request.user_agent }
+        end
+      else
+        erb :index, :format => :html5 , :locals => {:token => '',:valid => false, :agent => request.user_agent }
+        
       end
     end
   
@@ -267,7 +309,7 @@ class WebAppServer < Sinatra::Base
     #
     get '/*'  do
 
-      erb :index, :format => :html5
+      #erb :index, :format => :html5
       '{"error" : " Unknow Path!"}'
     end
     

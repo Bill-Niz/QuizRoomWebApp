@@ -13,3 +13,6 @@ gem "json"
 gem "dbi"
 gem "dbd-mysql" 
 gem "iconv"
+gem 'webrick'
+gem 'openssl'
+gem 'pony', :git => 'https://github.com/benprew/pony.git'

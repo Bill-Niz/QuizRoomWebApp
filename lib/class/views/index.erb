@@ -149,13 +149,21 @@ body:before {
       <div id="recoveryForm">
       <form class="round" method="post" name="recovery" action="<%= "/recovery?token=" +token %>" onsubmit="return validateForm()" >
           
-        
+        <% if(valid) %>
           <%="Nouveau mot de passe :"%><br/><br/>
           <input type="password" name="psw" size="30"  required><br/><br/>
           <%="Vérification :"%><br/><br/>
           <input type="password" name="psw2" size="30" required><br/><br/>
        
           <input type="submit">
+          
+          <% else %>
+            <% if(success) %>
+            <h2 style="color: #00FF00; text-align: center"> Mot de passe réinitialisé ! </h2>
+           <% else %>
+            <h2 style="color: #bb0000; text-align: center"> Jetton d'acces invalide ! </h2>
+           <% end %>
+          <% end %>
         
       </form>
       </div>

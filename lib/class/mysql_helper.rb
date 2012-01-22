@@ -11,6 +11,7 @@ class MysqlHelper
   USER_TABLE = "user"   # => User table name in DB
   USER_LIST_IN_CHAN_TABBLE = "listUserChannel"
   CHANNEL_TABLE = "channel"
+  RECOVERY_TABLE = "recovery"
   CATEGORIES_TABLE= "categories"
   LIST_USER_CHANNEL_TABLE = "listUserChannel"
   LOG_TABLE = "serverLog"
@@ -79,11 +80,11 @@ class MysqlHelper
     sth = @dbh.prepare(query)
     
     sth.execute(dataToCheck)
-    count=0
+  
     isIn=false
      sth.fetch() { |row|  
        
-       count+=1
+       
        isIn=row[0]
      } 
       #isIn = false if count==0
@@ -405,7 +406,7 @@ class MysqlHelper
     
     sth = @dbh.prepare(query)
     
-    sth.execute(userInfo["email"],useInfo["password"])
+    sth.execute(userInfo["email"],userInfo["password"])
     count=0
     isIn=false
     sth.fetch() { |row|  
@@ -435,7 +436,7 @@ class MysqlHelper
   
   ##
   #
-  #
+  # Try to login with facebook
   #
   ##
   def loginFacebook(userInfo)
@@ -513,6 +514,112 @@ class MysqlHelper
       
   end
   
+  #
+  #
+  #
+  # Check the validity of uuid with access token
+  #
+  #
+  def validRecoveryToken(token)
+    
+    begin
+    
+    query = "SELECT user_id_user FROM `#{RECOVERY_TABLE}` WHERE `token` = ?  AND `expiration_token` > NOW()"
+     
+    self.connect unless self.connected?  # => connect to the DB server if not connected
+    
+    sth = @dbh.prepare(query)
+    
+    sth.execute(token)
+    isIn=false
+    sth.fetch() { |row|  
+       isIn=row[0]
+     } 
+     
+    sth.finish
+    
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+    end
+    return isIn
+      
+  end
+  
+  #
+  # Update user  password
+  #
+  def updatePassword(iduser,psw)
+    
+    begin
+      query = "UPDATE  `#{DB_NAME}`.`#{USER_TABLE}` SET  `password`  =  ? WHERE  `user`.`id_user` = ?;"
+      self.connect unless self.connected?  # => connect to the DB server if not connected
+      sth = @dbh.prepare(query)
+      sth.execute(psw,iduser)
+     
+      
+    sth.finish
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+    end
+    
+      
+  end
+  
+  #
+  #
+  #
+  #
+  # delete token from recovery password
+  #
+  def deleteRecoveryPasswordToken(token)
+    
+    begin
+      query = "DELETE FROM `#{DB_NAME}`.`#{RECOVERY_TABLE}` WHERE `#{TOKEN_TABLE}`.`token` = ?"
+      queryReset = "ALTER TABLE #{RECOVERY_TABLE} AUTO_INCREMENT = 1"
+      self.connect unless self.connected?  # => connect to the DB server if not connected
+      sth = @dbh.prepare(query)
+      sth.execute(token)
+      sth = @dbh.prepare(queryReset)
+      sth.execute
+      
+    sth.finish
+    rescue DBI::DatabaseError => e
+     puts "An error occurred"
+     puts "Error code:    #{e.err}"
+     puts "Error message: #{e.errstr}"
+     @dbh.rollback
+    rescue Exception => e  
+      puts "error!!! -> : #{e.to_s}"
+    
+    ensure
+     # disconnect from server
+     @dbh.disconnect if @connected
+     @connected=false
+    end
+    
+      
+  end
+  
   #####################################################
   #                                                   #
   #                   LOG HANDLER                     #
@@ -522,16 +629,16 @@ class MysqlHelper
   #
   #
   #
-  def log(uuid,ipsource,responseTime,responseSize)
+  def log(uuid,ipsource,request,responseTime,responseSize)
     begin
-      query = "INSERT INTO `#{DB_NAME}`.`#{LOG_TABLE}` (`uuid`, `ip_address`,`response_time`,`response_data_size`) 
-                                                                       VALUES (?, ?, ?, ?)"
+      query = "INSERT INTO `#{DB_NAME}`.`#{LOG_TABLE}` (`uuid`, `ip_address`,`request`,`response_time`,`response_data_size`) 
+                                                                       VALUES (?, ?, ?, ?, ?)"
     
     self.connect unless self.connected?  # => connect to the DB server if not connected
     
     sth = @dbh.prepare(query)
 
-    sth.execute(uuid,ipsource,responseTime,responseSize)
+    sth.execute(uuid,ipsource,request,responseTime,responseSize)
     sth.finish
     rescue DBI::DatabaseError => e
      puts "An error occurred"

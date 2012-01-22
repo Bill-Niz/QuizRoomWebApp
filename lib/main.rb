@@ -13,16 +13,39 @@ load "class/chat_handler.rb"
 load "class/utility.rb"
 load "class/user_handler.rb"
 load "class/log.rb"
+load "class/mail_helper.rb"
+require 'pony'
 
 
 
 
-w = WebAppServer.new(port=4444)
+port_web = 4444
+port_chat = 5555
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-#q = ChatServer.new(5555)
+ thread_web = Thread.new(port_web) { 
+  
+  w = WebAppServer.new(port=port_web)
+  
+}
+thread_chat = Thread.new { 
+  
+  q = ChatServer.new(port_chat)
+  
+}
+thread_web.join()
+thread_chat.join()
 
-t = UserHandler.new
-Log::logHttpsRequest(0, "192.102.1.1", 30, 40)
+
+
+#option = {
+#     :address        => 'relay.skynet.be',
+##     :port           => '25',
+##     :user_name      => '',
+##     :password       => '',
+##     :authentication => :plain, # :plain, :login, :cram_md5, no auth by default
+##     :domain         => "localhost.localdomain" # the HELO domain provided by the client to the server
+#   }
+#
+#puts Pony.mail(:from => 'bill.nizeyimana@quizroom.com', :subject => 'Recovery Password',:to => 'hust.kmeleon@gmail.com',:html_body => '<h1>Hello there!</h1>', :body => "In case you can't read html, Hello there.", :via => :smtp, :via_options => option)
 
 

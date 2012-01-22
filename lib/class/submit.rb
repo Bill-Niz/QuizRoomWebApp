@@ -33,7 +33,7 @@ class Submit
   ##
   
   ERROR_UNKNOWN_METHOD = '{"error":"Unknown method"}'
-  SUCCESS_USER_REGISTERED = '{"succes":"ok"}'
+  SUCCESS_USER_REGISTERED = '{"success":"ok"}'
   ERROR_USER_NOT_REGISTERED = '{"error":"fail : Something went wrong"}'
   ERROR_USER_EXIST = '{"error":"user already exist"}'
   
@@ -58,8 +58,8 @@ class Submit
       
           unless @mysqlHelper.insertUser(@userData['email'], 
                               @userData['password'],
-                              @userData['lastname'], 
-                              @userData['firstname'], 
+                              @userData['last_name'], 
+                              @userData['first_name'], 
                               @userData['birthdate'], 
                               @userData['uuid'],
                               @userData['facebook_id'], 
@@ -80,9 +80,9 @@ class Submit
       if !checkUser
       unless @mysqlHelper.insertUser(@userData['email'], 
                               @userData['password'],
-                              @userData['lastname'], 
-                              @userData['firstname'], 
-                              @userData['birthdate'], 
+                              @userData['last_name'], 
+                              @userData['first_name'],
+                              nil,
                               @userData['uuid'],
                               nil, 
                               nil, 
